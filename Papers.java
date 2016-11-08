@@ -1,6 +1,10 @@
 import java.sql.*;
 import java.util.*;
 
+/*
+Database access class for the Papers table
+*/
+
 public class Papers {
 
    //global variables
