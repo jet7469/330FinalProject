@@ -14,7 +14,7 @@ public class Database {
    
    // constructors
    public Database() {
-      String uri = "jdbc:mysql://localhost/researchDb?autoReconnect=true&useSSL=false";
+      String uri = "jdbc:mysql://127.0.0.1/FacResearchDB?useSSL=false";
       String driver = "com.mysql.jdbc.Driver";
       String username = "root";
       String password = "student";
