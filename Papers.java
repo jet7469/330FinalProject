@@ -2,7 +2,7 @@ import java.sql.*;
 import java.util.*;
 
 /*
-Database access class for the Papers table
+Data layer class for the Papers table
 */
 
 public class Papers {
@@ -62,10 +62,4 @@ public class Papers {
    public void setCitation(String _citation) {
       citation = _citation;
    }
-   
-   //fetch method
-   public void fetch(String sql) {
-      
-   }
-
 }
