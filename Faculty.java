@@ -2,8 +2,7 @@ import java.util.*;
 import java.sql.*;
 
 public class Faculty {
-   Database mysql = new Database("jdbc:mysql://127.0.0.1/FacResearchDB?useSSL=false", 
-                                                    "com.mysql.jdbc.Driver", "root", "Westridge1");
+
    // global vars
    private int id;
    private String fName;
