@@ -12,11 +12,12 @@ public class Papers {
    public String title;
    public String abstractText;
    public String citation;
+   
+   Database mysql;
 
-   private Database mysql = new Database();
 
    //default constructor
-   public void Papers() {
+   public Papers() {
       id = 0;
       title = "";
       abstractText = "";
@@ -24,11 +25,18 @@ public class Papers {
    }
    
    //parameterized constructor
-   public void Papers(int _id, String _title, String _abstractText, String _citation) {
+   public Papers(int _id, String _title, String _abstractText, String _citation) {
       id = _id;
       title = _title;
       abstractText = _abstractText;
       citation = _citation;
+      
+      try{
+      mysql = new Database();
+      }catch(DLException dle){
+         dle.printStackTrace();
+      }
+
    }
    
    //accessors
@@ -77,11 +85,9 @@ public class Papers {
           throw new DLException(dle, "fetch:73", "Can't Connect");
        }
       
-      String select = "SELECT * FROM " + "papers WHERE id = ? and WHERE keyword = ?";
+      String select = "SELECT * FROM " + "papers WHERE id = ?";
       strVals.add(Integer.toString(this.getId()));
-      strVals.add(this.getTitle());
-      strVals.add(this.getAbstractText());
-      strVals.add(this.getCitation());
+
 
         try {                                        
          result = mysql.getData(select, strVals);
