@@ -167,7 +167,7 @@ public class Faculty {
       }
       
       try {   
-         String insert = "INSERT INTO equipment VALUES(?" + ", ?" + ", ?" +", ?" + ");";  
+         String insert = "INSERT INTO faculty VALUES(?" + ", ?" + ", ?" +", ?" + ");";  
          mysql.setData(insert, strVals);
         } catch(DLException dle) {
            throw new DLException(dle, "post:177", "INSERT Statement Error");
@@ -199,7 +199,7 @@ public class Faculty {
       }   
       
       try {  
-         String deleteCommand = ("DELETE FROM equipment WHERE equipid = ?"); 
+         String deleteCommand = ("DELETE FROM faculty WHERE equipid = ?"); 
          mysql.setData(deleteCommand, strVals);
         } catch(DLException dle) {
            throw new DLException(dle, "delete:206", "DELETE Statement Error");
