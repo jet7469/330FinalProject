@@ -45,6 +45,7 @@ public class PostView extends JPanel {
       //south of panel
       jbSubmit = new JButton("Submit"); //ACTIONLISTENER FOR BUTTON NEEDED HERE***
       add(jbSubmit, BorderLayout.SOUTH);
+      jbSubmit.setPreferredSize(new Dimension(20, 40));
       
       
    
