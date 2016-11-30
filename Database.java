@@ -14,24 +14,30 @@ public class Database {
    
    // constructors
    public Database() {
-      String uri = "jdbc:mysql://127.0.0.1/FacResearchDB?useSSL=false";
-      String driver = "com.mysql.jdbc.Driver";
-      String username = "root";
-      String password = "student";
-   }
-
-   public Database(String _uri, String _driver, String _username, String _password) throws DLException {
-      uri = _uri;
-      driver = _driver;
-      username = _username;
-      password = _password;
+      uri = "jdbc:mysql://127.0.0.1/FacResearchDB?useSSL=false";
+      driver = "com.mysql.jdbc.Driver";
+      username = "root";
+      password = "Westridge1";
       
-      try {
-         Class.forName(driver); // how to load the driver
-      } catch(ClassNotFoundException cnfe) {
-         throw new DLException(cnfe, "An Error Has Occured", "Database:30", "Cannot find or load driver: " + driver);
-      }
+      System.out.println(uri + driver + username + password);
+      
    }
+// 
+//    public Database(String _uri, String _driver, String _username, String _password) throws DLException {
+//       uri = _uri;
+//       driver = _driver;
+//       username = _username;
+//       password = _password;
+//       
+//       System.out.println(uri + driver + username + password);
+//       
+//       
+//       try {
+//          Class.forName(driver); // how to load the driver
+//       } catch(ClassNotFoundException cnfe) {
+//          throw new DLException(cnfe, "An Error Has Occured", "Database:30", "Cannot find or load driver: " + driver);
+//       }
+//    }
    
    
    /**
@@ -42,9 +48,13 @@ public class Database {
    * @return boolean
    */
    public boolean connect() throws DLException {
+      System.out.println("SPOT 2: " + uri + driver + username + password);
 
       // connect to the database
       try {
+      
+            System.out.println("SPOT 3: " + uri + driver + username + password);
+
          conn = DriverManager.getConnection(uri, username, password);
          System.out.println("Connected to DB");
          return true;
@@ -182,11 +192,12 @@ public class Database {
    *
    * @param sql - a string that contains an sql query
    */
-   public void descTable(String sqlQuery) throws DLException {
+   public void descTable(String sqlQuery, ArrayList<String> strVals) throws DLException {
    
       try{   
-         Statement stmnt = conn.createStatement();
-         ResultSet rs = stmnt.executeQuery(sqlQuery);
+//          Statement stmnt = conn.createStatement();
+         PreparedStatement pstmt = prepare(sqlQuery, strVals);
+         ResultSet rs = pstmt.executeQuery();
          ResultSetMetaData rsmd = rs.getMetaData();         
          int numFields = rsmd.getColumnCount();
          System.out.println(numFields + " fields retrieved.\n");
@@ -239,7 +250,7 @@ public class Database {
          System.out.printf("+\n");
          System.out.printf("\n\n\n");  
       } catch (SQLException sqle) {
-         throw new DLException(sqle, "An Error Has Occurred", "descTable:189", "Describe Table error", "arg1 - String sql: " + sqlQuery);
+         throw new DLException(sqle, "An Error Has Occurred", "descTable:189", "Describe Table error", "arg1 - String sql: " + sqlQuery + strVals);
       }         
    }
    
@@ -295,6 +306,8 @@ public class Database {
       }catch (SQLException sqle) {
          throw new DLException(sqle, "An Error Has Occurred", "getData:284", "Could Not Retrieve Data", "arg1 - String sqlQuery: " + sqlQuery + "arg2 - ArrayList<String>: " + strVals);
       }  
+      
+      this.descTable(sqlQuery, strVals);
       return lst;      
    }
    

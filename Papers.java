@@ -8,12 +8,12 @@ Data layer class for the Papers table
 public class Papers {
 
    //global variables
-   public int id;
-   public String title;
-   public String abstractText;
-   public String citation;
+   private int id;
+   private String title;
+   private String abstractText;
+   private String citation;
    
-   Database mysql;
+   private Database mysql = new Database();
 
 
    //default constructor
@@ -24,19 +24,16 @@ public class Papers {
       citation = "";
    }
    
+   public Papers(int _id) {
+      id = _id;
+   }
+   
    //parameterized constructor
-   public Papers(int _id, String _title, String _abstractText, String _citation) {
+   public Papers(int _id, String _title, String _abstractText, String _citation) throws DLException {
       id = _id;
       title = _title;
       abstractText = _abstractText;
       citation = _citation;
-      
-      try{
-      mysql = new Database();
-      }catch(DLException dle){
-         dle.printStackTrace();
-      }
-
    }
    
    //accessors
@@ -109,7 +106,6 @@ public class Papers {
            throw new DLException(dle, "fetch:97", "SELECT Statement Error");
         }      
  
-      
       mysql.close();
       return true;
    }   
