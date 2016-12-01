@@ -29,8 +29,10 @@ public class LogInView extends JFrame implements ActionListener {
    JTextField newPassword;
    JButton newAccountSubmit;
 
+
    //constructor
    public LogInView() {
+      
       
       //sets JLabel for title and subtitle
       title = new JLabel("<html><center>Faculty Research</center><br>Login to access the RIT Faculty Research Database", JLabel.CENTER);
@@ -100,14 +102,11 @@ public class LogInView extends JFrame implements ActionListener {
          
          DLUser dl = new DLUser();
          try {
-            boolean success = dl.login(email,pass);
-            if (success) {
-               new View();
-            }
-            else {
-               //nothing
-            }
-
+            dl.login(email,pass);
+            
+               new View(dl);
+           
+            
          }
          catch (Exception e) {
             System.out.println("Exception occured");
