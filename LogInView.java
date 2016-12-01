@@ -5,7 +5,7 @@ import javax.swing.border.*;
 
 //GUI class
 
-public class LogInView extends JFrame {
+public class LogInView extends JFrame implements ActionListener {
 
    //global variables
    //panels
@@ -50,6 +50,7 @@ public class LogInView extends JFrame {
       existingPassword = new JTextField();
       existingPassword.setToolTipText("Password");
       login = new JButton("Submit");
+      login.addActionListener(this);
       west.add(existingAccount);
       west.add(existingEmail);
       west.add(existingPassword);
@@ -89,5 +90,26 @@ public class LogInView extends JFrame {
       setDefaultCloseOperation(EXIT_ON_CLOSE);
 
    } //end constructor
+   
+   public void actionPerformed(ActionEvent ae) {
+      Object choice = ae.getSource();
+      
+      if (choice == login) {
+         String email = existingEmail.getText();
+         String pass = existingPassword.getText();
+         
+         DLUser dl = new DLUser();
+         try {
+            dl.login(email,pass);
+
+         }
+         catch (Exception e) {
+            System.out.println("Exception occured");
+         }
+         
+      
+      }
+   
+   }
 
 } //end class LogInView
