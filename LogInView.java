@@ -61,6 +61,7 @@ public class LogInView extends JFrame implements ActionListener {
       newEmail = new JTextField();
       newPassword = new JTextField();
       newAccountSubmit = new JButton("Submit");
+      newAccountSubmit.addActionListener(this);
       east.add(newAccount);
       east.add(new JLabel("Email:",JLabel.LEFT));
       east.add(newEmail);
@@ -101,6 +102,9 @@ public class LogInView extends JFrame implements ActionListener {
          }
          catch (Exception e) {
             System.out.println("Exception occured");
+            JOptionPane.showMessageDialog(this, "<html>Error loggin in. Check the following:" +
+               "<br>1. You have filled out all the fields<br>2. Email is corrct" +
+               "<br>3. Password is correct<br>4. Your account exists ");
          } 
       }
       
@@ -119,6 +123,7 @@ public class LogInView extends JFrame implements ActionListener {
                newDL.login(newUser, newPass);
             }
             catch(Exception e) {
+               JOptionPane.showMessageDialog(this, "Error creating account.");
                System.out.println("Exception Occured");
             }      
       }   
