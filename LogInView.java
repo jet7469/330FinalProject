@@ -100,16 +100,39 @@ public class LogInView extends JFrame implements ActionListener {
          
          DLUser dl = new DLUser();
          try {
-            dl.login(email,pass);
+            boolean success = dl.login(email,pass);
+            if (success) {
+               new View();
+            }
+            else {
+               //nothing
+            }
 
          }
          catch (Exception e) {
             System.out.println("Exception occured");
-         }
-         
-      
+         } 
       }
-   
+      
+      else if (choice == newAccountSubmit) {
+         
+         String newUser = newEmail.getText();
+         String newPass = newPassword.getText();
+         //String newName = newName.getText();
+         
+        DLUser newDL = new DLUser();
+        //boolean newEntry = newDL.post(newUser, newPass, name, "student");
+        
+        //if (newEntry) {
+        
+            try {
+               newDL.login(newUser, newPass);
+            }
+            catch(Exception e) {
+               System.out.println("Exception Occured");
+            }
+            
+        //}      
+      }   
    }
-
 } //end class LogInView
