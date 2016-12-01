@@ -22,9 +22,6 @@ public class LogInView extends JFrame implements ActionListener {
    JButton login;
    //variables for creating a new account
    JLabel newAccount;
-   JRadioButton facultyUser;
-   JRadioButton studentUser;
-   JRadioButton publicUser;
    JTextField newEmail;
    JTextField newPassword;
    JButton newAccountSubmit;
@@ -45,37 +42,32 @@ public class LogInView extends JFrame implements ActionListener {
       
       //west panel for loggin in with an exisiting account
       west = new JPanel(new GridLayout(0,1));
-      west.setBorder(new EmptyBorder(100, 100, 100, 100));
+      west.setBorder(new EmptyBorder(70, 100, 100, 00));
       existingAccount = new JLabel("Have an account?");
       existingEmail = new JTextField();
-      existingEmail.setToolTipText("Email");
       existingPassword = new JTextField();
-      existingPassword.setToolTipText("Password");
       login = new JButton("Submit");
       login.addActionListener(this);
       west.add(existingAccount);
+      west.add(new JLabel("Email:",JLabel.LEFT));
       west.add(existingEmail);
+      west.add(new JLabel("Password:",JLabel.LEFT));
       west.add(existingPassword);
       west.add(login, BorderLayout.SOUTH);
       
       
       //east panel for creating a new account
       east = new JPanel(new GridLayout(0,1));
-      east.setBorder(new EmptyBorder(100, 100, 100, 100));
-      newAccount = new JLabel("First time here?");
-      facultyUser = new JRadioButton("Faculty");
-      studentUser = new JRadioButton("Student");
-      publicUser = new JRadioButton("Public");
+      east.setBorder(new EmptyBorder(70, 100, 100, 100));
+      newAccount = new JLabel("First time here as a student?");
       newEmail = new JTextField();
-      newEmail.setToolTipText("Email");
       newPassword = new JTextField();
-      newPassword.setToolTipText("Password");
       newAccountSubmit = new JButton("Submit");
+      newAccountSubmit.addActionListener(this);
       east.add(newAccount);
-      east.add(facultyUser);
-      east.add(studentUser);
-      east.add(publicUser);
+      east.add(new JLabel("Email:",JLabel.LEFT));
       east.add(newEmail);
+      east.add(new JLabel("Password:",JLabel.LEFT));
       east.add(newPassword);
       east.add(newAccountSubmit, BorderLayout.SOUTH);
       
@@ -90,9 +82,8 @@ public class LogInView extends JFrame implements ActionListener {
       setLocationRelativeTo(null);
       setSize(600,500);
       setDefaultCloseOperation(EXIT_ON_CLOSE);
-
    } //end constructor
-   
+
    public void actionPerformed(ActionEvent ae) {
       Object choice = ae.getSource();
       
@@ -110,6 +101,9 @@ public class LogInView extends JFrame implements ActionListener {
          }
          catch (Exception e) {
             System.out.println("Exception occured");
+            JOptionPane.showMessageDialog(this, "<html>Error loggin in. Check the following:" +
+               "<br>1. You have filled out all the fields<br>2. Email is corrct" +
+               "<br>3. Password is correct<br>4. Your account exists ");
          } 
       }
       
@@ -128,10 +122,9 @@ public class LogInView extends JFrame implements ActionListener {
                newDL.login(newUser, newPass);
             }
             catch(Exception e) {
+               JOptionPane.showMessageDialog(this, "Error creating account.");
                System.out.println("Exception Occured");
-            }
-            
-        //}      
+            }      
       }   
    }
 } //end class LogInView
