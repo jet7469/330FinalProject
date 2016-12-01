@@ -93,7 +93,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ("stevezilora", "5f47859188a602594556580532e814a3", "Steve Zilora", "Faculty"), ("danbogard", "f4f6172eb26581952a70d7199bfd2ddb", "Dan Bogaard", "Faculty"), ("admin", "21232f297a57a5a743894a0e4a801fc3", "admin", "Admin"), ("guest", "21232f297a57a5a743894a0e4a801fc3", "guest", "Public");
+INSERT INTO `users` VALUES ("stevezilora", "5f47859188a602594556580532e814a3", "Steve Zilora", "Faculty"), ("danbogard", "f4f6172eb26581952a70d7199bfd2ddb", "Dan Bogaard", "Faculty"), ("admin", "21232f297a57a5a743894a0e4a801fc3", "admin", "Admin"), ("guest", "084e0343a0486ff05530df6c705c8bb4", "guest", "Public");
 
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
