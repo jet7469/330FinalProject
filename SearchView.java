@@ -1,21 +1,24 @@
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
+
 //JPanel for SearchTab
 
-public class SearchView extends JPanel {
+public class SearchView extends JPanel implements ActionListener {
 
    //global variables
    private JPanel jpCenter;
    private JTextField jtfKeyword;
    private JTextField jtfFaculty;
-   private JTextField jtfEmail;
+   private JTextField jtfTopic;
    private JButton jbSearch;
 
    //constructor
@@ -36,9 +39,9 @@ public class SearchView extends JPanel {
       jtfFaculty = new JTextField();
       jpCenter.add(jtfFaculty);
       
-      jpCenter.add(new JLabel("Email: ", JLabel.RIGHT));
-      jtfEmail = new JTextField();
-      jpCenter.add(jtfEmail);
+      jpCenter.add(new JLabel("Topic: ", JLabel.RIGHT));
+      jtfTopic = new JTextField();
+      jpCenter.add(jtfTopic);
       
       add(jpCenter, BorderLayout.CENTER);
       
@@ -48,5 +51,22 @@ public class SearchView extends JPanel {
       add(jbSearch, BorderLayout.SOUTH);
    
    } //end constructor
+   
+   public void actionPerformed(ActionEvent ae) {
+      String keyword = jtfKeyword.getText();
+      String facName = jtfFaculty.getText();
+      String topic = jtfTopic.getText();
+      
+      if (keyword != "") {
+      //select statement
+      }
+      if (facName != "") {
+      //select statement
+      }
+      if (topic != "") {
+      //select statement
+      }
+
+   }
 
 } //end class SearchView
