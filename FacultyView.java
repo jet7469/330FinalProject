@@ -1,8 +1,7 @@
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+import javax.swing.JPanel;
 
 //JPanel for FacultyTab
+//Takes the faculty member that is logged in and loads all of their research
 
 public class FacultyView extends JPanel {
 

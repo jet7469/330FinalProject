@@ -1,8 +1,7 @@
-import java.util.*;
 import javax.swing.table.AbstractTableModel;
 
 /**
-*TableModel for the TableView class
+*TableModel for the Table
 */
 
 class CustomTableModel extends AbstractTableModel {

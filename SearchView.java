@@ -1,7 +1,11 @@
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-import javax.swing.border.*;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.Dimension;
+
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 
 //JPanel for SearchTab
 

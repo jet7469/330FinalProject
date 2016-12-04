@@ -1,6 +1,6 @@
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JTabbedPane;
+import javax.swing.JPanel;
 
 //GUI class
 
@@ -12,21 +12,33 @@ public class View extends JFrame {
    public JPanel researchTab;
    public JPanel postTab;
    public JPanel searchTab;
-   
+   DLUser dl;
 
    //constructor
-   public View() {
+   public View(DLUser dl) {
    
-      //plan to make a JOptionPane on opening of the program that allows to login or create acccount
-      
+      this.dl = dl;
+   
       //tabbed pane
       jtp = new JTabbedPane();
-      facultyTab = new FacultyView();
-      jtp.add("Faculty", facultyTab);
+      
+      //faculty viewing tab -- only viewable if admin or faculty
+      if (dl.getAccess() == "Faculty") {
+         facultyTab = new FacultyView();
+         jtp.add("My Research", facultyTab);
+      }
+      
+      //research viewing tab
       researchTab = new ResearchView();
       jtp.add("Research", researchTab);
-      postTab = new PostView();
-      jtp.add("Post", postTab);
+      
+      //add research tab -- only viewable if admin or faculty
+      if (dl.getAccess() == "Faculty") {
+         postTab = new PostView();
+         jtp.add("Post", postTab);
+      }
+      
+      //advanced search tab
       searchTab = new SearchView();
       jtp.add("Advanced Search", searchTab);
       add(jtp);
