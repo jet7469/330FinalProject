@@ -1,7 +1,16 @@
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-import javax.swing.border.*;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.border.EmptyBorder;
 
 //GUI class
 
@@ -24,6 +33,7 @@ public class LogInView extends JFrame implements ActionListener {
    JLabel newAccount;
    JTextField newEmail;
    JTextField newPassword;
+   JTextField newName;
    JButton newAccountSubmit;
 
 
@@ -62,6 +72,7 @@ public class LogInView extends JFrame implements ActionListener {
       newAccount = new JLabel("First time here as a student?");
       newEmail = new JTextField();
       newPassword = new JTextField();
+      newName = new JTextField();
       newAccountSubmit = new JButton("Submit");
       newAccountSubmit.addActionListener(this);
       east.add(newAccount);
@@ -69,6 +80,8 @@ public class LogInView extends JFrame implements ActionListener {
       east.add(newEmail);
       east.add(new JLabel("Password:",JLabel.LEFT));
       east.add(newPassword);
+      east.add(new JLabel("Full name:",JLabel.LEFT));
+      east.add(newName);
       east.add(newAccountSubmit, BorderLayout.SOUTH);
       
       //adds panels to frame
@@ -85,6 +98,8 @@ public class LogInView extends JFrame implements ActionListener {
    } //end constructor
 
    public void actionPerformed(ActionEvent ae) {
+      
+      //find which button was clicked
       Object choice = ae.getSource();
       
       if (choice == login) {
@@ -94,16 +109,18 @@ public class LogInView extends JFrame implements ActionListener {
          DLUser dl = new DLUser();
          try {
             dl.login(email,pass);
-            
-               new View(dl);
-           
-            
+            new View(dl);  
          }
-         catch (Exception e) {
+         
+         catch (DLException dle) {
             System.out.println("Exception occured");
             JOptionPane.showMessageDialog(this, "<html>Error loggin in. Check the following:" +
                "<br>1. You have filled out all the fields<br>2. Email is corrct" +
                "<br>3. Password is correct<br>4. Your account exists ");
+         }
+         catch (Exception e) {
+            System.out.println("Generic exception");
+            e.printStackTrace();
          } 
       }
       
