@@ -110,7 +110,7 @@ public class LogInView extends JFrame implements ActionListener {
          try {
             dl.login(username,pass);
             System.out.println("LOGIN " + dl.getAccess());
-            new View(dl);  
+            new MainView(dl);  
          }
          
          catch (DLException dle) {
