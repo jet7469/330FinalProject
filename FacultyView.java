@@ -26,6 +26,9 @@ public class FacultyView extends JPanel {
       
       //table in center
       table = new JTable(new CustomTableModel(columnNames, data));
+      table.setRowHeight(50);
+      table.setShowGrid(false);
+      table.setShowHorizontalLines(true);
       add(table, BorderLayout.CENTER);
       
       //delete button on south

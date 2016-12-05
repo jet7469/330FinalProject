@@ -40,6 +40,7 @@ public class ResearchView extends JPanel {
       
       //center/south of panel
       table = new JTable(new CustomTableModel(columnNames, data));
+      table.setRowHeight(50);
       
       JScrollPane jsp = new JScrollPane(table);
       jsp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
