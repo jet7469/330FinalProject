@@ -12,7 +12,7 @@ public class ResearchView extends JPanel {
    private JTextField jtfSearch;
    
    //THESE ARE PLACEHOLDERS, NEED TO BE CHANGED
-   private String [] columnNames = {"Title", "Abstract", "Citation"}; 
+   private String [] columnNames = {"Title", "Abstract", "Citation", "Author"}; 
    private Object [][] data;
                                  
    private Database db;
@@ -31,7 +31,9 @@ public class ResearchView extends JPanel {
       try {
          db.connect();
          
-         String sql = "SELECT * from papers";
+         String sql = "SELECT p.title, p.abstract, p.citation, CONCAT(f.fname, ' ', f.lname) FROM papers p " +
+                      "INNER JOIN authorship a ON a.paperId = p.id " +
+                      "INNER JOIN faculty f ON a.facultyId = f.id";
          
          ArrayList<ArrayList<String>> myData = db.getData(sql, true);
          data = convert(myData);
@@ -57,13 +59,13 @@ public class ResearchView extends JPanel {
    //convert 2D arrayList result set to 2d array for JTable
    public Object[][] convert(ArrayList<ArrayList<String>>dataList) {
       
-      int numRows = dataList.size();
+      int numRows = dataList.size()-1; //total rows -1 bc the first row is column names
       
-      Object [][] newData = new Object [numRows][3];
+      Object [][] newData = new Object [numRows][5];
       
       for (int i = 1; i < dataList.size(); i++) {
          for (int j = 1; j < dataList.get(i).size(); j++) {
-            newData[i][j-1] = (Object) dataList.get(i).get(j);
+            newData[i-1][j-1] = (Object) dataList.get(i).get(j);
          }
       }
       return newData;
