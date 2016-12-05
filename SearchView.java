@@ -16,6 +16,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import java.util.ArrayList;
+
 
 //JPanel for SearchTab
 
@@ -83,7 +85,9 @@ public class SearchView extends JPanel implements ActionListener {
          }  
       }
       if (facName != "") {
-         String facultySelectQuery = "SELECT lName FROM faculty WHERE lName LIKE '%?%';";
+      
+      
+         /*String facultySelectQuery = "SELECT lName FROM faculty WHERE lName LIKE '%?%';";
          PreparedStatement stmt = conn.prepareStatement(facultySelectQuery);
          
          stmt.setString(1, facName);
@@ -98,7 +102,7 @@ public class SearchView extends JPanel implements ActionListener {
                JOptionPane.showMessageDialog(this, "<html>Search results of faculty:" +
                "<br>" + columnValue );
             }
-         } 
+         }*/ 
       }
       if (topic != "") {
          String topicSelectQuery = "SELECT title FROM papers JOIN paper_keywords ON papers.id = paper_keywords.id WHERE keyword LIKE '%?%';";
@@ -118,8 +122,22 @@ public class SearchView extends JPanel implements ActionListener {
             }
          } 
       }
-
+   }//end actionPerformed
+   
+   //convert 2D arrayList result set to 2d array for JTable
+   public Object[][] convert(ArrayList<ArrayList<String>>dataList) {
+      
+      int numRows = dataList.size();
+      
+      Object [][] newData = new Object [numRows][4];
+      
+      for (int i = 0; i < dataList.size(); i++) {
+         for (int j = 0; j < dataList.get(i).size(); j++) {
+            newData[i][j] = (Object) dataList.get(i).get(j);
+         }
+      }
+      return newData;
    }
-
+   
 } //end class SearchView
 

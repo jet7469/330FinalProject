@@ -17,7 +17,7 @@ public class Database {
       uri = "jdbc:mysql://127.0.0.1/FacResearchDB?useSSL=false";
       driver = "com.mysql.jdbc.Driver";
       username = "root";
-      password = ""; // enter your mysql password
+      password = "RITinn244"; // enter your mysql password
       
       System.out.println(uri + driver + username + password);
       
