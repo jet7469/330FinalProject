@@ -133,7 +133,7 @@ public class LogInView extends JFrame implements ActionListener {
          
          DLUser newDL = new DLUser();
          try {
-            boolean newEntry = newDL.post(newUser, newPass, newFullName, "student");
+            boolean newEntry = newDL.post(newUser, newPass, newFullName, "Student");
          
             if (newEntry) {
                newDL.login(newUser, newPass);

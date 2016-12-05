@@ -41,13 +41,13 @@ public class MainView extends JFrame {
       }
       
       if (dl.getAccess().equals("Admin")) {
-         postTab = new PostView();
-         jtp.add("Add Faculty", postTab);
+         addTab = new AddView();
+         jtp.add("Add Faculty", addTab);
       }
       
       //advanced search tab
-      //addTab = new addView(); // DOES NOT EXIST YET
-      jtp.add("Advanced Search", addTab);
+//       searchTab = new SearchView();
+      jtp.add("Advanced Search", searchTab);
       add(jtp);
       
       
