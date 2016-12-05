@@ -19,6 +19,21 @@ DROP DATABASE IF EXISTS FacResearchDB;
 CREATE DATABASE FacResearchDB;
 USE FacResearchDB;
 
+DROP TABLE IF EXISTS `collaborations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `collaborations` (
+  `paperId` int(11) NOT NULL,
+  `userName` varchar(25) NOT NULL DEFAULT '',
+  PRIMARY KEY (`paperId`,`userName`),
+  KEY `fk_c_p` (`paperId`),
+  KEY `fk_c_u` (`userName`),
+  CONSTRAINT `fk_c_p` FOREIGN KEY (`paperId`) REFERENCES `papers` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_c_u` FOREIGN KEY (`userName`) REFERENCES `users` (`UserName`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+
 --
 -- Table structure for table `authorship`
 --
@@ -94,7 +109,6 @@ CREATE TABLE `users` (
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` VALUES ("stevezilora", "5f47859188a602594556580532e814a3", "Steve Zilora", "Faculty"), ("danbogard", "f4f6172eb26581952a70d7199bfd2ddb", "Dan Bogaard", "Faculty"), ("admin", "21232f297a57a5a743894a0e4a801fc3", "admin", "Admin"), ("guest", "084e0343a0486ff05530df6c705c8bb4", "guest", "Public");
-
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -151,6 +165,8 @@ INSERT INTO `papers` VALUES (1,'TED','A new database architecture that is modele
 /*!40000 ALTER TABLE `papers` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
