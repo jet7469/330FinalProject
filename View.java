@@ -12,18 +12,20 @@ public class View extends JFrame {
    public JPanel researchTab;
    public JPanel postTab;
    public JPanel searchTab;
-   DLUser dl;
+   public JPanel addTab;
+   public DLUser dl = null;
 
    //constructor
-   public View(DLUser dl) {
+   public View(DLUser _dl) {
    
-      this.dl = dl;
+      dl = _dl;
    
       //tabbed pane
       jtp = new JTabbedPane();
       
+      
       //faculty viewing tab -- only viewable if admin or faculty
-      if (dl.getAccess() == "Faculty") {
+      if (dl.getAccess().equals("Faculty") || dl.getAccess().equals("Admin")) {
          facultyTab = new FacultyView();
          jtp.add("My Research", facultyTab);
       }
@@ -33,14 +35,19 @@ public class View extends JFrame {
       jtp.add("Research", researchTab);
       
       //add research tab -- only viewable if admin or faculty
-      if (dl.getAccess() == "Faculty") {
+      if (dl.getAccess().equals("Faculty") || dl.getAccess().equals("Admin")) {
          postTab = new PostView();
          jtp.add("Post", postTab);
       }
       
+      if (dl.getAccess().equals("Admin")) {
+         postTab = new PostView();
+         jtp.add("Add Faculty", postTab);
+      }
+      
       //advanced search tab
-      searchTab = new SearchView();
-      jtp.add("Advanced Search", searchTab);
+      addTab = new addView(); // DOES NOT EXIST YET
+      jtp.add("Advanced Search", addTab);
       add(jtp);
       
       

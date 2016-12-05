@@ -229,6 +229,7 @@ public class DLUser {
                  
       if(_username.equals(checkUsername) && md5Password.equals(checkPassword)) {
          System.out.println("Welcome!");
+         this.fetch();         
          return true;         
       } else {
          System.out.println("INCORRECT LOGIN INFORMATION");
