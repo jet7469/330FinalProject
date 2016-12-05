@@ -4,10 +4,17 @@ import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 
 //JPanel for SearchTab
@@ -58,7 +65,24 @@ public class SearchView extends JPanel implements ActionListener {
       String topic = jtfTopic.getText();
       
       if (keyword != "") {
-      //select statement
+         String keywordSelectQuery = "SELECT title FROM papers JOIN paper_keywords ON papers.id = paper_keywords.id WHERE keyword LIKE '%sci%';";
+         PreparedStatement stmt = conn.prepareStatement(keywordSelectQuery);
+         
+         stmt.setString(1, keyword);
+         ResultSet rs = stmt.executeQuery();
+         ResultSetMetaData rsmd = rs.getMetaData();
+         
+         int columnsNumber = rsmd.getColumnCount();
+         
+         while (rs.next()) {
+            for (int i = 1; i <= columnsNumber; i++) {
+               String columnValue = rs.getString(i);
+               JOptionPane.showMessageDialog(this, "<html>Search results of keyword:" +
+               "<br>" + columnValue );
+            }
+         }
+         
+         
       }
       if (facName != "") {
       //select statement
