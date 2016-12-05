@@ -106,9 +106,10 @@ public class LogInView extends JFrame implements ActionListener {
          String username = existingUsername.getText();
          String pass = existingPassword.getText();
          
-         DLUser dl = new DLUser();
+         DLUser dl = new DLUser(username);
          try {
             dl.login(username,pass);
+            System.out.println("LOGIN " + dl.getAccess());
             new View(dl);  
          }
          
