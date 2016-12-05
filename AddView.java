@@ -45,11 +45,11 @@ public class AddView extends JPanel implements ActionListener {
       jpCenter.add(new JLabel("Name: ", JLabel.RIGHT));
       jtfName = new JTextField();
       jpCenter.add(jtfName);
-            
+      
       add(jpCenter, BorderLayout.CENTER);
       
       //south of panel
-      jbSubmit = new JButton("Submit"); //ACTIONLISTENER FOR BUTTON NEEDED HERE***
+      jbSubmit = new JButton("Submit");
       jbSubmit.addActionListener(this);
       add(jbSubmit, BorderLayout.SOUTH);
       jbSubmit.setPreferredSize(new Dimension(20, 40));
