@@ -32,7 +32,7 @@ public class MainView extends JFrame {
       
       //research viewing tab
       researchTab = new ResearchView();
-      jtp.add("Research", researchTab);
+      jtp.add("All Research", researchTab);
       
       //add research tab -- only viewable if admin or faculty
       if (dl.getAccess().equals("Faculty") || dl.getAccess().equals("Admin")) {
