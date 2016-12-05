@@ -16,6 +16,7 @@ public class DLUser {
    private String password;
    private String name;
    private String access;
+   private int facultyId;
    
    private Database mysql = new Database();
    
@@ -26,11 +27,12 @@ public class DLUser {
    public DLUser(String _username) {
       username = _username;
    }
-   public DLUser(String _username, String _password, String _name, String _access) {
+   public DLUser(String _username, String _password, String _name, String _access, int _facultyId) {
       username = _username;
       password = _password;
       name = _name;
       access = _access;
+      facultyId = _facultyId;
    }
    
    // Accessors and Mutators
@@ -42,6 +44,8 @@ public class DLUser {
    protected void setName(String _name){this.name = _name;} 
    protected String getAccess(){return this.access;}  
    protected void setAccess(String _access){this.access = _access;}
+   protected int getFacultyId(){return this.facultyId;}  
+   protected void setFacultyId(int _facultyId){this.facultyId = _facultyId;}
    
    
    /** 
@@ -81,7 +85,8 @@ public class DLUser {
          this.setUsername(inner.get(0));
          this.setPassword(inner.get(1));
          this.setName(inner.get(2));
-         this.setAccess(inner.get(3));         
+         this.setAccess(inner.get(3));
+//          this.setFacultyId(Integer.parseInt(inner.get(4))); // testing in case of linking users to faculty table        
         } catch(DLException dle) {
            throw new DLException(dle, "user fetch:75", "SELECT Statement Error");
         }      
@@ -98,7 +103,7 @@ public class DLUser {
    * @param mysql - the database to use
    * @return a boolean
    */
-   public boolean put(String _username, String _password, String _name, String _access, String _key) throws DLException {  
+   public boolean put(String _username, String _password, String _name, String _access, int _facultyId, String _key) throws DLException {  
    ArrayList<String> strVals = new ArrayList<String>();
    
       try {
@@ -111,11 +116,12 @@ public class DLUser {
       strVals.add(_password);      
       strVals.add(_name);      
       strVals.add(_access);
-      strVals.add(_key);       
+      strVals.add(_key); 
+      strVals.add(Integer.toString(_facultyId));      
                    
       try {
         String update = "UPDATE users SET username = ?" + ", password = ?" + 
-                         ", name = ?" + ", access = ?" + 
+                         ", name = ?" + ", access = ?" + ", facultyId = ?" +
                          " WHERE username = ?";                                             
          mysql.setData(update, strVals);
         } catch(DLException dle) {
@@ -136,13 +142,14 @@ public class DLUser {
    * @param mysql - the database to use
    * @return a boolean
    */
-   public boolean post(String _username, String _password, String _name, String _access) throws DLException{
+   public boolean post(String _username, String _password, String _name, String _access, int _facultyId) throws DLException{
       ArrayList<String> strVals = new ArrayList<String>();
 
       strVals.add(_username); 
       strVals.add(_password);      
       strVals.add(_name);      
       strVals.add(_access);
+      strVals.add(Integer.toString(_facultyId));
          
       try {
          mysql.connect();                 
@@ -151,7 +158,7 @@ public class DLUser {
       }
       
       try {   
-         String insert = "INSERT INTO users VALUES(?" + ", md5(" + "?" + ")" + ", ?" +", ?" + ");";  
+         String insert = "INSERT INTO users VALUES(?" + ", md5(" + "?" + ")" + ", ?" +", ?" +", ?" + ");";  
          mysql.setData(insert, strVals);
         } catch(DLException dle) {
            throw new DLException(dle, "users_post:163", "INSERT Statement Error");

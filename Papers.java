@@ -109,6 +109,7 @@ public class Papers {
       mysql.close();
       return true;
    }   
+      
    
    /** 
    * put method takes object attributes and updates existing 
@@ -159,7 +160,6 @@ public class Papers {
    public boolean post(int id, String title, String abstractText, String citation) throws DLException{
       ArrayList<String> strVals = new ArrayList<String>();
 
-      strVals.add(Integer.toString(id)); 
       strVals.add(title);
       strVals.add(abstractText);            
       strVals.add(citation);            
@@ -171,7 +171,7 @@ public class Papers {
       }
       
       try {   
-         String insert = "INSERT INTO papers VALUES(?" + ", ?" + ", ?" + ", ?" + ");";  
+         String insert = "INSERT INTO papers (`title`, `abstract`, `citation`) VALUES(?" + ", ?" + ", ?" + ");";  
          mysql.setData(insert, strVals);
         } catch(DLException dle) {
            throw new DLException(dle, "post:177", "INSERT Statement Error");

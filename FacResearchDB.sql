@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: research
 -- ------------------------------------------------------
--- Server version	5.5.16
+-- Server version 5.5.16
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -98,7 +98,10 @@ CREATE TABLE `users` (
   `Password` char(32) NOT NULL DEFAULT '',
   `Name` varchar(50) DEFAULT '',
   `Access` ENUM('Faculty', 'Student', 'Public', 'Admin'),
-  PRIMARY KEY (`UserName`)
+  `FacultyId` int(11) DEFAULT NULL,
+  PRIMARY KEY (`UserName`),
+  KEY `fk_u_f` (`facultyId`),
+  CONSTRAINT `fk_u_f` FOREIGN KEY (`FacultyId`) REFERENCES `faculty` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -108,7 +111,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ("stevezilora", "5f47859188a602594556580532e814a3", "Steve Zilora", "Faculty"), ("danbogard", "f4f6172eb26581952a70d7199bfd2ddb", "Dan Bogaard", "Faculty"), ("admin", "21232f297a57a5a743894a0e4a801fc3", "admin", "Admin"), ("guest", "084e0343a0486ff05530df6c705c8bb4", "guest", "Public");
+INSERT INTO `users` VALUES ("stevezilora", "5f47859188a602594556580532e814a3", "Steve Zilora", "Faculty", 1), ("danbogard", "f4f6172eb26581952a70d7199bfd2ddb", "Dan Bogaard", "Faculty", 2), ("admin", "21232f297a57a5a743894a0e4a801fc3", "admin", "Admin", NULL), ("guest", "084e0343a0486ff05530df6c705c8bb4", "guest", "Public", NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -147,7 +150,7 @@ DROP TABLE IF EXISTS `papers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `papers` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL,
   `abstract` text,
   `citation` varchar(255) DEFAULT NULL,
