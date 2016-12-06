@@ -1,3 +1,16 @@
+/**Java Database Connectivity Final Project
+*Course Title: Java Data Connectivity and Access 
+*Course Number: ISTE-330
+*Instructor: Professor Floeser
+*@author Jenna Tillotson, Louis Trapani, Rosalee Hacker, Steven Ricci
+*@version 1.0, 12/7/2016
+*
+*Description:Paper Keywords Data Layer Class
+*"This class contains the methods conatins methods to support the Paper Keywords table in the 
+* Database, Including a connection to a database,
+*getting data from the data, setting data in the database, executing statments
+*and queries and describing tables."
+*/
 import java.sql.*;
 import java.util.*;
 
@@ -17,44 +30,63 @@ public class Paper_keywords {
    
    }
    
-   //gets the id and sets the object in the class
+   
+   /**Constructor for getting id and setting the object in the class
+   *@param id int
+   */
    public Paper_keywords(int _id) {
       id = _id;
    }
-   
-   //gets the keyword and sets the object in the class
+   /**Constructor for getting keyword and sets object in class
+   *@param keyword String
+   */
    public Paper_keywords(String _keyword) {
       keyword = _keyword;
    }
    
-   //constructor for both if needed
+   /**Constructor for getting both id and keyword and sets object in class
+   *@param id int
+   *@param keyword String
+   */
    public Paper_keywords(int _id, String _keyword) {
       id = _id;
       keyword = _keyword;
    }
    
    //accessors 
-   //getter for the id
+   
+   /**Gets the id
+   *@return id int
+   */
    public int getId() {
       return this.id;
    }
    
-   //getter for the keyword
+   /**Gets the keyword
+   *@return keyword String
+   */
    public String getKeywords() {
       return this.keyword;
    }
       
-   //setter for the id
+   /**Sets the keyword id
+   *@param keyword id
+   */
    public void setId(int _id) {
       this.id = _id;;
    }
    
-   //setter for the keyword
+   /**Sets the Keyword name
+   *@param keyword String
+   */
    public void setKeywords(String _keyword) {
       this.keyword = _keyword;
    }
    
-   
+   /**Fetch methods executes prepared statements using the getData method
+   *storing results in an array list/
+   *@return boolean
+   */
    public boolean fetch() throws DLException {
       ArrayList<ArrayList<String>> result;
       ArrayList<String> inner = new ArrayList<>();
