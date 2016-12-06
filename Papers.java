@@ -1,3 +1,17 @@
+/**Java Database Connectivity Final Project
+*Course Title: Java Data Connectivity and Access 
+*Course Number: ISTE-330
+*Instructor: Professor Floeser
+*@author Jenna Tillotson, Louis Trapani, Rosalee Hacker, Steven Ricci
+*@version 1.0, 12/7/2016
+*
+*Description: Papers Data Layer Class
+*"This program conatins methods to support Paper table in the Database. Including
+*connection to the database,
+*getting data from the data, setting data in the database, executing statments
+*and queries, describing tables and our class uses transactions"
+*
+*/
 import java.sql.*;
 import java.util.*;
 
@@ -15,20 +29,28 @@ public class Papers {
    
    private Database mysql = new Database();
 
-
-   //default constructor
+    /**
+    *Default Constructor
+    */
    public Papers() {
       id = 0;
       title = "";
       abstractText = "";
       citation = "";
    }
-   
+   /**Constructor with id
+   *@param id int
+   */
    public Papers(int _id) {
       id = _id;
    }
    
-   //parameterized constructor
+   /**Contructor with all parameters
+   *@param id
+   *@param title
+   *@param abstract test
+   *@param citation
+   */
    public Papers(int _id, String _title, String _abstractText, String _citation) throws DLException {
       id = _id;
       title = _title;
@@ -37,39 +59,62 @@ public class Papers {
    }
    
    //accessors
+   /**Get id
+   *@return id int
+   */
    public int getId() {
       return id;
    }
-   
+   /**Get Title
+   *@return title String
+   */
    public String getTitle() {
       return title;
    }
-   
+   /**Get Abstract Text
+   *@return Abstract Text String
+   */
    public String getAbstractText() {
       return abstractText;
    }
-   
+   /**Get Citation
+   *@return citation
+   */
    public String getCitation() {
       return citation;
    }
    
    //mutators
+   /**Set id
+   *@param id int
+   */
    public void setId(int _id) {
       id = _id;
    }
-   
+   /**Set title
+   *@param title String
+   */
    public void setTitle(String _title) {
       title = _title;
    }
-   
+   /**Set Abstract Text
+   *@param abstract text String
+   */
    public void setAbstractText(String _abstractText) {
       abstractText = _abstractText;
    }
-   
+   /**Set Citation
+   *@param citation String
+   */
    public void setCitation(String _citation) {
       citation = _citation;
    }
    
+   /**Fetch method uses the Database class method getData
+   *to retrieve values for particular attributes 
+   *and run and update
+   *@return Attribute Boolean Data
+   */
   public boolean fetch() throws DLException {
       ArrayList<ArrayList<String>> result;
       ArrayList<String> inner = new ArrayList<>();
