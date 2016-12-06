@@ -44,7 +44,7 @@ public class MainView extends JFrame {
       if (dl.getAccess().equals("Admin")) {
          addTab = new AddView();
          jtp.add("Add Faculty", addTab);
-         keywordsTab = new keywordsView();
+         keywordsTab = new KeywordsView();
          jtp.add("Edit Keywords", keywordsTab);
       }
       
