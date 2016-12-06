@@ -1,3 +1,16 @@
+/**Java Database Connectivity Final Project
+*Course Title: Java Data Connectivity and Access 
+*Course Number: ISTE-330
+*Instructor: Professor Floeser
+*@author Jenna Tillotson, Louis Trapani, Rosalee Hacker, Steven Ricci
+*@version 1.0, 12/7/2016
+*
+*Description: Search View Class
+*"This program conatins methods the creation of a JPanel for the Search tab
+*in the GUI. Action Listenter is implemented for events and 2d array lists
+*are needed for data."
+*/
+
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Dimension;
@@ -31,7 +44,9 @@ public class SearchView extends JPanel implements ActionListener {
    private JButton jbSearch;
    private DLUser dl;
 
-   //constructor
+   /**Constructor
+   *@param DLUser
+   */
    public SearchView(DLUser _dl) {
    
       dl = _dl;
@@ -66,6 +81,9 @@ public class SearchView extends JPanel implements ActionListener {
    
    } //end constructor
    
+   /**establishing the action event using the action performed method
+   *@param ActionEvent attribute
+   */
    public void actionPerformed(ActionEvent ae) {
       String keyword = jtfKeyword.getText();
       String facName = jtfFaculty.getText();
@@ -129,6 +147,10 @@ public class SearchView extends JPanel implements ActionListener {
    }//end actionPerformed
    
    //convert 2D arrayList result set to 2d array for JTable
+   /**Convert 2d arrayList result set to 2d array for JTable
+   *@param ArrayList datalist
+   *@return newData
+   */
    public Object[][] convert(ArrayList<ArrayList<String>>dataList) {
       
       int numRows = dataList.size();
