@@ -1,3 +1,17 @@
+/**Java Database Connectivity Final Project
+*Course Title: Java Data Connectivity and Access 
+*Course Number: ISTE-330
+*Instructor: Professor Floeser
+*@author Jenna Tillotson, Louis Trapani, Rosalee Hacker, Steven Ricci
+*@version 1.0, 12/7/2016
+*
+*Description: Authorship Class
+*"This program contains method supporting the Authorship Table 
+*in our Faculty Reasearch Database. This includes assinging attributes and
+*creating methods to fetch, post, put, detlete and update data."
+*
+*/
+
 //import java.sql.*;
 import java.util.*;
 
@@ -11,21 +25,31 @@ public class Authorship {
    
    
    
-   //default constructor
+   /**
+   *Default constructor
+   */
    public Authorship() {
    }
    
-   //gets the id and sets the object in the class
+   /**Constructor gets the id and sets the object in the class
+   *@param facultyId
+   */
    public Authorship(int _facultyId) {
       facultyId = _facultyId;
    }
    
-   //gets the keyword and sets the object in the class
+   /**Constructor gets the keyword and set the object in the class
+   *@param paperId
+   */
    public Authorship(int _paperId) {
       paperId = _paperId;
    }
    
    //constructor for both if needed
+   /**Constructor gets both faculty id and paper id and sets the object in the class
+   *@param facultyId
+   *@param paperId
+   */
    public Authorship(int _facultyId, int _paperId) {
       facultyId = _facultyId;
       paperId = _paperId;
@@ -33,18 +57,28 @@ public class Authorship {
    
    
    //Accessors and Mutator methods
+   
+   /**Get FacultyId
+   *@return facultyId int
+   */
    public int getFacultyId() {
       return this.facultyId;
    }
-   
+   /**Set facultyId
+   *@param facultyId int
+   */
    public void setFacultyId(int _facultyId) {
       this.facultyId = _facultyId;
    }
-   
+   /**Get paperId
+   *@return paperId int
+   */
    public int getPaperId() {
       return this.paperId;
    }
-   
+   /**Set paperId
+   *@param paperId int
+   */
    public void setPaperId(int _paperId) {
       this.paperId = _paperId;
    }
