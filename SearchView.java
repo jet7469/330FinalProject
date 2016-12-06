@@ -29,9 +29,13 @@ public class SearchView extends JPanel implements ActionListener {
    private JTextField jtfFaculty;
    private JTextField jtfTopic;
    private JButton jbSearch;
+   private DLUser dl;
 
    //constructor
-   public SearchView() {
+   public SearchView(DLUser _dl) {
+   
+      dl = _dl;
+      
       setLayout(new BorderLayout());
       
       //north of panel
@@ -56,6 +60,7 @@ public class SearchView extends JPanel implements ActionListener {
       
       //south of panel
       jbSearch = new JButton("Submit");
+      jbSearch.addActionListener(this);
       jbSearch.setPreferredSize(new Dimension(20, 40));
       add(jbSearch, BorderLayout.SOUTH);
    
@@ -66,61 +71,60 @@ public class SearchView extends JPanel implements ActionListener {
       String facName = jtfFaculty.getText();
       String topic = jtfTopic.getText();
       
-      if (keyword != "") {
-         String keywordSelectQuery = "SELECT title FROM papers WHERE abstract LIKE '%?%';";
-         PreparedStatement stmt = conn.prepareStatement(keywordSelectQuery);
-         
-         stmt.setString(1, keyword);
-         ResultSet rs = stmt.executeQuery();
-         ResultSetMetaData rsmd = rs.getMetaData();
-         
-         int columnsNumber = rsmd.getColumnCount();
-         
-         while (rs.next()) {
-            for (int i = 1; i <= columnsNumber; i++) {
-               String columnValue = rs.getString(i);
-               JOptionPane.showMessageDialog(this, "<html>Search results of keyword:" +
-               "<br>" + columnValue );
-            }
-         }  
-      }
-      if (facName != "") {
+      if (!keyword.isEmpty()) {
       
-      
-         /*String facultySelectQuery = "SELECT lName FROM faculty WHERE lName LIKE '%?%';";
-         PreparedStatement stmt = conn.prepareStatement(facultySelectQuery);
+         String keywordString = "";
+         ArrayList<ArrayList<String>> results;
          
-         stmt.setString(1, facName);
-         ResultSet rs = stmt.executeQuery();
-         ResultSetMetaData rsmd = rs.getMetaData();
-         
-         int columnsNumber = rsmd.getColumnCount();
-         
-         while (rs.next()) {
-            for (int i = 1; i <= columnsNumber; i++) {
-               String columnValue = rs.getString(i);
-               JOptionPane.showMessageDialog(this, "<html>Search results of faculty:" +
-               "<br>" + columnValue );
+         try {
+            results = dl.searchKeyword("%" + keyword + "%");
+            
+            for (int i = 0; i < results.size(); i++) {
+               for (int j = 0; j < results.get(i).size(); j++) {
+                  keywordString = keywordString.concat(results.get(i).get(j)) + "\n";
+               }
             }
-         }*/ 
+            JOptionPane.showMessageDialog(this, "<html>Search results of keyword input:<br>" + keywordString);
+         } catch (Exception e) {
+            System.out.println("Error retreiving keyword search");
+         }   
       }
-      if (topic != "") {
-         String topicSelectQuery = "SELECT title FROM papers JOIN paper_keywords ON papers.id = paper_keywords.id WHERE keyword LIKE '%?%';";
-         PreparedStatement stmt = conn.prepareStatement(topicSelectQuery);
+      
+      if (!facName.isEmpty()) {
          
-         stmt.setString(1, topic);
-         ResultSet rs = stmt.executeQuery();
-         ResultSetMetaData rsmd = rs.getMetaData();
+         String facultyString = "";
+         ArrayList<ArrayList<String>> results;
          
-         int columnsNumber = rsmd.getColumnCount();
-         
-         while (rs.next()) {
-            for (int i = 1; i <= columnsNumber; i++) {
-               String columnValue = rs.getString(i);
-               JOptionPane.showMessageDialog(this, "<html>Search results of keyword:" +
-               "<br>" + columnValue );
+         try {
+            results = dl.searchFac("%" + facName + "%");
+            
+            for (int i = 0; i < results.size(); i++) {
+               for (int j = 0; j < results.get(i).size(); j++) {
+                  facultyString = facultyString.concat(results.get(i).get(j)) + "\n";
+               }
             }
-         } 
+            JOptionPane.showMessageDialog(this, "<html>Search results of faculty input:<br>" + facultyString);
+         } catch (Exception e) {
+            System.out.println("Error retreiving faculty search");
+         }   
+      }
+      
+      if (!topic.isEmpty()) {
+         String topicString = "";
+         ArrayList<ArrayList<String>> results;
+         
+         try {
+            results = dl.searchTopics("%" + topic + "%");
+            
+            for (int i = 0; i < results.size(); i++) {
+               for (int j = 0; j < results.get(i).size(); j++) {
+                  topicString = topicString.concat(results.get(i).get(j)) + "\n";
+               }
+            }
+            JOptionPane.showMessageDialog(this, "<html>Search results of faculty input:<br>" + topicString);
+         } catch (Exception e) {
+            System.out.println("Error retreiving topic search");
+         }   
       }
    }//end actionPerformed
    
