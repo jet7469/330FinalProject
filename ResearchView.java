@@ -1,3 +1,16 @@
+/**Java Database Connectivity Final Project
+*Course Title: Java Data Connectivity and Access 
+*Course Number: ISTE-330
+*Instructor: Professor Floeser
+*@author Jenna Tillotson, Louis Trapani, Rosalee Hacker, Steven Ricci
+*@version 1.0, 12/7/2016
+*
+*Description: Post View Class
+*"This program conatins methods the creation of a JPanel for the 
+*Research tab in our GUI. This class requires a connection to the Database
+*and use of 2d ArrayLists for data."
+*/
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -17,7 +30,9 @@ public class ResearchView extends JPanel {
                                  
    private Database db;
    
-   //constructor
+   /**
+   *Constructor
+   */
    public ResearchView() {
    
       //layout of Panel
@@ -56,7 +71,10 @@ public class ResearchView extends JPanel {
    
    } //end constructor
    
-   //convert 2D arrayList result set to 2d array for JTable
+   /**Convert 2D arrayList result set to 2d array for JTable
+   *@param ArrayList datalist
+   *@return newData
+   */
    public Object[][] convert(ArrayList<ArrayList<String>>dataList) {
       
       int numRows = dataList.size()-1; //total rows -1 bc the first row is column names
