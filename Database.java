@@ -1,3 +1,17 @@
+/**Java Database Connectivity Final Project
+*Course Title: Java Data Connectivity and Access 
+*Course Number: ISTE-330
+*Instructor: Professor Floeser
+*@author Jenna Tillotson, Louis Trapani, Rosalee Hacker, Steven Ricci
+*@version 1.0, 12/7/2016
+*
+*Description: Database Class
+*"This program conatins methods to support connection to a database,
+*getting data from the data, setting data in the database, executing statments
+*and queries, describing tables and our class uses transactions
+*
+*/
+
 import java.sql.*;
 import java.util.*;
 
