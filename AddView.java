@@ -1,3 +1,15 @@
+/**Java Database Connectivity Final Project
+*Course Title: Java Data Connectivity and Access 
+*Course Number: ISTE-330
+*Instructor: Professor Floeser
+*@author Jenna Tillotson, Louis Trapani, Rosalee Hacker, Steven Ricci
+*@version 1.0, 12/7/2016
+*
+*Description: Post View Class
+*"This program conatins methods to support the creation of a JPanel for
+*the Post tab in the GUI. Action Listener is implemented for events."
+*/
+
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Dimension;
@@ -24,7 +36,9 @@ public class AddView extends JPanel implements ActionListener {
    private JTextField jtfName;
    private JButton jbSubmit;
 
-   //constructor
+   /**
+   *Constructor
+   */
    public AddView() {
       setLayout(new BorderLayout());
       
@@ -55,7 +69,9 @@ public class AddView extends JPanel implements ActionListener {
       jbSubmit.setPreferredSize(new Dimension(20, 40));
 
    } //end constructor
-
+      /**Implementing actionn event using actionPerformed method
+      *@param ActionEvent attribute
+      */
       public void actionPerformed(ActionEvent ae) {
          String newUser = jtfUserName.getText();
          String newPass = jtfPassword.getText();
