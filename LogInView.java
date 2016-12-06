@@ -1,3 +1,16 @@
+/**Java Database Connectivity Final Project
+*Course Title: Java Data Connectivity and Access 
+*Course Number: ISTE-330
+*Instructor: Professor Floeser
+*@author Jenna Tillotson, Louis Trapani, Rosalee Hacker, Steven Ricci
+*@version 1.0, 12/7/2016
+*
+*Description: LoginView Class
+*"This program conatins the methods and classes required to
+*create a GUI for a Login Page for those accessing our program.
+*There are multiple options for logging in depending on access level
+*and we implemented Java events for the various scenrios."
+*/
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 
@@ -96,7 +109,11 @@ public class LogInView extends JFrame implements ActionListener {
       setSize(600,500);
       setDefaultCloseOperation(EXIT_ON_CLOSE);
    } //end constructor
-
+   
+   /**Implementation of an Action Event
+   *for login attemps and their outcomes
+   *@param ActionEvent id
+   */
    public void actionPerformed(ActionEvent ae) {
       
       //find which button was clicked
