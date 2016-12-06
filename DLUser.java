@@ -2,6 +2,9 @@ import java.util.ArrayList;
 //import java.sql.*;
 import java.security.MessageDigest;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 /** 
 * Louis Trapani
 * DLUser.java
@@ -235,4 +238,72 @@ public class DLUser {
          return false;
       }      
    }
+   
+   public ArrayList<ArrayList<String>> searchKeyword(String keyword) throws DLException {
+      ArrayList<ArrayList<String>> result;
+      ArrayList<String> keywords = new ArrayList<>();
+      
+       try {
+         mysql.connect();
+       } catch(DLException dle) {
+          throw new DLException(dle, "user fetch:66", "Can't Connect");
+       }
+      
+      String keywordSelectQuery = "SELECT title FROM papers WHERE abstract LIKE ?";
+      keywords.add(keyword);
+        try {                                        
+         result = mysql.getData(keywordSelectQuery, keywords);
+        } catch(DLException dle) {
+           throw new DLException(dle, "user fetch:75", "SELECT Statement Error");
+        }      
+      
+      mysql.close();
+      return result;
+   }
+   
+   public ArrayList<ArrayList<String>> searchFac(String facName) throws DLException {
+      ArrayList<ArrayList<String>> result;
+      ArrayList<String> facNames = new ArrayList<>();
+      
+       try {
+         mysql.connect();
+       } catch(DLException dle) {
+          throw new DLException(dle, "user fetch:66", "Can't Connect");
+       }
+      
+      String facultySelectQuery = "SELECT lName FROM faculty WHERE lName LIKE ?";
+      facNames.add(facName);
+        try {                                        
+         result = mysql.getData(facultySelectQuery, facNames);
+        } catch(DLException dle) {
+           throw new DLException(dle, "user fetch:75", "SELECT Statement Error");
+        }      
+      
+      mysql.close();
+      return result;
+   }
+   
+    public ArrayList<ArrayList<String>> searchTopics(String topic) throws DLException {
+      ArrayList<ArrayList<String>> result;
+      ArrayList<String> topics = new ArrayList<>();
+      
+       try {
+         mysql.connect();
+       } catch(DLException dle) {
+          throw new DLException(dle, "user fetch:66", "Can't Connect");
+       }
+      
+      String topicSelectQuery = "SELECT title FROM papers JOIN paper_keywords ON papers.id = paper_keywords.id WHERE keyword LIKE ? GROUP BY title";
+      topics.add(topic);
+        try {                                        
+         result = mysql.getData(topicSelectQuery, topics);
+        } catch(DLException dle) {
+           throw new DLException(dle, "user fetch:75", "SELECT Statement Error");
+        }      
+      
+      mysql.close();
+      return result;
+   }
+
+
 }
