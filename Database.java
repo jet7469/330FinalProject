@@ -8,7 +8,7 @@
 *Description: Database Class
 *"This program conatins methods to support connection to a database,
 *getting data from the data, setting data in the database, executing statments
-*and queries, describing tables and our class uses transactions
+*and queries, describing tables and our class uses transactions"
 *
 */
 
