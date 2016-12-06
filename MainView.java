@@ -1,3 +1,16 @@
+/**Java Database Connectivity Final Project
+*Course Title: Java Data Connectivity and Access 
+*Course Number: ISTE-330
+*Instructor: Professor Floeser
+*@author Jenna Tillotson, Louis Trapani, Rosalee Hacker, Steven Ricci
+*@version 1.0, 12/7/2016
+*
+*Description: Main View Class
+*"This class creates GUI using JFrame for our
+*programs main page that contains tabs for different section
+*and also verifies access for sections only viewable for 
+*members with different access levels"
+*/
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
@@ -17,6 +30,9 @@ public class MainView extends JFrame {
    public DLUser dl = null;
 
    //constructor
+   /**MainView class constructor
+   *@param Data layer user
+   */
    public MainView(DLUser _dl) {
    
       dl = _dl;
