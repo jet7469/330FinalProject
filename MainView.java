@@ -13,6 +13,7 @@ public class MainView extends JFrame {
    public JPanel postTab;
    public JPanel searchTab;
    public JPanel addTab;
+   public JPanel keywordsTab;
    public DLUser dl = null;
 
    //constructor
@@ -24,8 +25,8 @@ public class MainView extends JFrame {
       jtp = new JTabbedPane();
       
       
-      //faculty viewing tab -- only viewable if admin or faculty
-      if (dl.getAccess().equals("Faculty") || dl.getAccess().equals("Admin")) {
+      //faculty viewing tab -- only viewable if faculty
+      if (dl.getAccess().equals("Faculty")) {
          facultyTab = new FacultyView();
          jtp.add("My Research", facultyTab);
       }
@@ -43,12 +44,14 @@ public class MainView extends JFrame {
       if (dl.getAccess().equals("Admin")) {
          addTab = new AddView();
          jtp.add("Add Faculty", addTab);
+         keywordsTab = new keywordsView();
+         jtp.add("Edit Keywords", keywordsTab);
       }
       
       //advanced search tab
        searchTab = new SearchView();
-      jtp.add("Advanced Search", searchTab);
-      add(jtp);
+       jtp.add("Advanced Search", searchTab);
+       add(jtp);
       
       
       //GUI settings
