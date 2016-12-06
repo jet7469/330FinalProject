@@ -1,3 +1,17 @@
+/**Java Database Connectivity Final Project
+*Course Title: Java Data Connectivity and Access 
+*Course Number: ISTE-330
+*Instructor: Professor Floeser
+*@author Jenna Tillotson, Louis Trapani, Rosalee Hacker, Steven Ricci
+*@version 1.0, 12/7/2016
+*
+*Description: Collaboration
+*"This program conatins methods to support the collaboration table
+*in the database. This includes getting data from the database, setting data in the database, 
+*executing statementsand queries, describing tables."
+*
+*/
+
 import java.util.*;
 import java.sql.*;
 
@@ -7,25 +21,40 @@ public class Collaboration {
     
    Database mysql = new Database();
     
-
+	/**
+	*Default Constructor
+	*/
 	public Collaboration() {} 
+    /**Constructor gets gets paperId and userId
+    *@param paperId
+    *@param userId
+    */
     public Collaboration(int _paperId, int _userId) {
          paperId = _paperId;
          userId = _userId;
     }
-    
+    //accessor/mutators
+    /**Get paperId
+    *@return paperId int
+    */
     public int getPaperId() {
     	return this.paperId;
     }
-    
+    /**Set paperId
+    *@param paperId int
+    */
     public void setPaperId(int _paperId) {
     	this.paperId = _paperId;
     }
-    
+    /**Get userId
+    *@return userId int
+    */
     public int getUserId() {
     	return this.userId;
     }
-    
+    /**Set userId
+    *@param userId int
+    */
     public void setUserId(int _userId) {
     	this.userId = _userId;
     }
