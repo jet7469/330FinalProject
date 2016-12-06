@@ -110,10 +110,16 @@ public class Papers {
       citation = _citation;
    }
    
-   /**Fetch method uses the Database class method getData
-   *to retrieve values for particular attributes 
-   *and run and update
-   *@return Attribute Boolean Data
+    /** 
+   *  fetch method calls getData with a mySQL SELECT
+   * statement to retrieve an entry from the DB.
+   * Once entry is retrieved it will check if there
+   * is data available. If so, it will set the object
+   * attributes with that information and return true.
+   * If data is not avialable it will return false
+   *
+   * @param mysql - the database to use
+   * @return a boolean
    */
   public boolean fetch() throws DLException {
       ArrayList<ArrayList<String>> result;
