@@ -1,3 +1,16 @@
+/**Java Database Connectivity Final Project
+*Course Title: Java Data Connectivity and Access 
+*Course Number: ISTE-330
+*Instructor: Professor Floeser
+*@author Jenna Tillotson, Louis Trapani, Rosalee Hacker, Steven Ricci
+*@version 1.0, 12/7/2016
+*
+*Description: Data Layer User Class
+*"This program is the Data Layer class providing simplified access to data
+*stored in the faculty research database through various attributes."
+*
+*/
+
 import java.util.ArrayList;
 //import java.sql.*;
 import java.security.MessageDigest;
@@ -5,12 +18,6 @@ import java.security.MessageDigest;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-/** 
-* Louis Trapani
-* DLUser.java
-* PE009
-* ISTE 330-02
-*/
 
 public class DLUser {
 
@@ -25,10 +32,22 @@ public class DLUser {
    
    
    // Constructors
+  /**
+  *Default constructor
+  */
    public DLUser() {}
+  /**Constructor gets username
+  *@param username 
+  */ 
    public DLUser(String _username) {
       username = _username;
    }
+   /**Constructor gets all attributes
+   *@param username
+   *@param password
+   *@param name
+   *@param access 
+   */
    public DLUser(String _username, String _password, String _name, String _access) {
       username = _username;
       password = _password;
@@ -37,14 +56,54 @@ public class DLUser {
    }
    
    // Accessors and Mutators
-   protected String getUsername(){return this.username;}
-   protected void setUsername(String _username){this.username = _username;}
-   protected String getPassword(){return this.password;}
-   protected void setPassword(String _password){this.password = _password;}
-   protected String getName(){return this.name;}
-   protected void setName(String _name){this.name = _name;} 
-   protected String getAccess(){return this.access;}  
-   protected void setAccess(String _access){this.access = _access;}
+   /**Get username
+   *@return username String
+   */
+   protected String getUsername(){
+	return this.username;
+   }
+   /**Set username
+   *@param username String
+   */
+   protected void setUsername(String _username){
+	this.username = _username;
+   }
+   /**Get password
+   *@return password String
+   */
+   protected String getPassword(){
+	return this.password;
+   }
+   /**Set password
+   *@param password String
+   */
+   protected void setPassword(String _password){
+	this.password = _password;
+   } 
+   /**Get name
+   *@return name String
+   */
+   protected String getName(){
+	return this.name;
+   }
+   /**Set name
+   *@param name String
+   */
+   protected void setName(String _name){
+	this.name = _name;
+   } 
+   /**Get access
+   *@return access String
+   */
+   protected String getAccess(){
+	return this.access;
+   }  
+   /**Set access
+   *@param access String
+   */
+   protected void setAccess(String _access){
+	this.access = _access;
+   }
    
    
    /** 
@@ -91,7 +150,7 @@ public class DLUser {
  
       mysql.close();
       return true;
-   }
+   }//end fetch()
    
    /** 
    * put method takes object attributes and updates existing 
@@ -126,7 +185,7 @@ public class DLUser {
       
       mysql.close();
       return true;  
-   }
+   }//end put()
    
    
    /** 
@@ -160,7 +219,7 @@ public class DLUser {
         }       
       mysql.close();
       return true;
-   }
+   }//end post
    
    
    
@@ -192,7 +251,7 @@ public class DLUser {
         }        
       mysql.close();
       return true;
-   }   
+   }//end delete()
    
        
    /**
@@ -237,8 +296,12 @@ public class DLUser {
          System.out.println("INCORRECT LOGIN INFORMATION");
          return false;
       }      
-   }
-   
+   }//end login()
+	
+   /**Search by Keyword
+   *@param keyword String
+   *@return resultset
+   */
    public ArrayList<ArrayList<String>> searchKeyword(String keyword) throws DLException {
       ArrayList<ArrayList<String>> result;
       ArrayList<String> keywords = new ArrayList<>();
@@ -260,7 +323,11 @@ public class DLUser {
       mysql.close();
       return result;
    }
-   
+	
+   /**Search by Faculty Name
+   *@param faculty name String
+   *@return resultset
+   */
    public ArrayList<ArrayList<String>> searchFac(String facName) throws DLException {
       ArrayList<ArrayList<String>> result;
       ArrayList<String> facNames = new ArrayList<>();
@@ -281,8 +348,12 @@ public class DLUser {
       
       mysql.close();
       return result;
-   }
-   
+   }//end searchKeyWord()
+	
+   /**Search by topic
+   *@param topic String
+   *@return resultset
+   */
     public ArrayList<ArrayList<String>> searchTopics(String topic) throws DLException {
       ArrayList<ArrayList<String>> result;
       ArrayList<String> topics = new ArrayList<>();
@@ -303,7 +374,7 @@ public class DLUser {
       
       mysql.close();
       return result;
-   }
+   }//end searchTopics
 
 
-}
+}//END CLASS
