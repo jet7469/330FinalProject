@@ -1,3 +1,17 @@
+/**Java Database Connectivity Final Project
+*Course Title: Java Data Connectivity and Access 
+*Course Number: ISTE-330
+*Instructor: Professor Floeser
+*@author Jenna Tillotson, Louis Trapani, Rosalee Hacker, Steven Ricci
+*@version 1.0, 12/7/2016
+*
+*Description: View Class
+*"This program conatins methods to support the creation of a JFrame
+*containing tabs for features the program has to offer. It's important 
+*to notice that some tabs have certain access restritions based on
+*type of user."
+*/
+
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
@@ -15,7 +29,9 @@ public class View extends JFrame {
    public JPanel addTab;
    public DLUser dl = null;
 
-   //constructor
+   /**Constructor
+   *@param DLUser
+   */
    public View(DLUser _dl) {
    
       dl = _dl;
