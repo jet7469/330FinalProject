@@ -1,3 +1,17 @@
+/**Java Database Connectivity Final Project
+*Course Title: Java Data Connectivity and Access 
+*Course Number: ISTE-330
+*Instructor: Professor Floeser
+*@author Jenna Tillotson, Louis Trapani, Rosalee Hacker, Steven Ricci
+*@version 1.0, 12/7/2016
+*
+*Description: Faculty Class
+*"This program contains method supporting the Faulty Table 
+*In our Faculty Reasearch Database. This includes assinging attributes and
+*creating methods to fetch, post, put, detlete and update data"
+*
+*/
+
 import java.util.*;
 import java.sql.*;
 
@@ -12,12 +26,23 @@ public class Faculty extends DLUser {
 
    private Database mysql = new Database();
 
-
+   /**Default Construstor
+   *@param no parameters
+   */
    public Faculty() {}
-   
+   /**Constructor
+   *@param id of faculty member
+   */
    public Faculty(int _id) {
       id = _id;
    }
+   /**Constructor
+   *@param id of faculty member
+   *@param first name of faculty member
+   *@param last name of faculty member
+   *@param password
+   *@param email
+   */
    public Faculty(int _id, String _fName, String _lName, String _password, String _email) {
       id = _id;
       fName = _fName;
@@ -27,43 +52,70 @@ public class Faculty extends DLUser {
    }
    
    // Accessors and Mutators
+   /**Gets the Id of faculty 
+   *@return int id
+   */
    public int getId(){
       return this.id;
    }
+   /**Sets the Id of faculty
+   *@param id of faculty
+   */
    public void setId(int _id) {
       this.id = _id;
    }
-   
+   /**gets the first name
+   *@return String first name
+   */
    public String getFName() {
       return this.fName;
    }
    public void setFName(String _fName) {
       this.fName = _fName;
    }
-   
+   /**gets the last name
+   *@return last name String
+   */
    public String getLName() {
       return this.lName;
    }
+   /**Sets the last name
+   *@param last name of faculty
+   */
    public void setLName(String _lName) {
       this.lName = _lName;
    }
-   
+   /**gets the password
+   *@return password String
+   */
    public String getPassword() {
       return this.password;
    }
+   /**Sets the password
+   *@param password String
+   */
    public void setPassword(String _password) {
       this.password = _password;
    }
-   
+   /**gets the Email
+   *@return email String
+   */
    public String getEmail() {
       return this.email;
    }
+   /**sets the Email
+   *@param Email String
+   */
    public void setEmail(String _email) {
       this.email = _email;
    }   
    
    
-   
+   /**fetch metod use the Database class getMethod class
+   *to retrieve values for particular attributes 
+   *and run and update
+   *@return Attribute Data Boolean
+   */
    public boolean fetch() throws DLException {
       ArrayList<ArrayList<String>> result;
       ArrayList<String> inner = new ArrayList<>();
@@ -207,7 +259,11 @@ public class Faculty extends DLUser {
       mysql.close();
       return true;
    } 
-
+   /**The Swap method creates an object of the Faculty class and fetches data,
+   *the data fetched is then swaped with another object in a transaction, a rollback
+   *if the swap fails
+   *@param id of the faculty object
+   */
    public void swap(int id2) throws DLException {
       Faculty fac2 = new Faculty(id2); 
       fac2.fetch();
