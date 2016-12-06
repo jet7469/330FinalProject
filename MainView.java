@@ -49,7 +49,7 @@ public class MainView extends JFrame {
       }
       
       //advanced search tab
-       searchTab = new SearchView();
+       searchTab = new SearchView(dl);
        jtp.add("Advanced Search", searchTab);
        add(jtp);
       
