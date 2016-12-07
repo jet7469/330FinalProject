@@ -68,6 +68,7 @@ public class FacultyView extends JPanel implements ActionListener {
             ArrayList<ArrayList<String>> myData = db.getData(sql, true);
             data = db.convert(myData);
             
+            
             table = new JTable(new CustomTableModel(columnNames, data));
             table.setRowHeight(50);
       
@@ -90,7 +91,6 @@ public class FacultyView extends JPanel implements ActionListener {
             JScrollPane jsp = new JScrollPane(table);
             jsp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
             add(jsp, BorderLayout.CENTER);
-
 
          }
          db.close();   
@@ -121,6 +121,7 @@ public class FacultyView extends JPanel implements ActionListener {
          //query to delete row with that title
          String sql = "DELETE FROM papers WHERE title = '" + selectedTitle + "'";
          db.setData(sql);
+
          
          db.close();
       }
