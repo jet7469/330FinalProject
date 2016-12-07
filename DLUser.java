@@ -338,7 +338,9 @@ public class DLUser {
           throw new DLException(dle, "user fetch:66", "Can't Connect");
        }
       
-      String facultySelectQuery = "SELECT lName FROM faculty WHERE lName LIKE ?";
+      String facultySelectQuery = "SELECT faculty.fName, faculty.lName, papers.title FROM faculty JOIN " + 
+         "authorship ON authorship.facultyID = faculty.id JOIN papers ON papers.id = " + 
+         "authorship.paperId WHERE lName LIKE ?";
       facNames.add(facName);
         try {                                        
          result = mysql.getData(facultySelectQuery, facNames);
@@ -364,7 +366,7 @@ public class DLUser {
           throw new DLException(dle, "user fetch:66", "Can't Connect");
        }
       
-      String topicSelectQuery = "SELECT title FROM papers JOIN paper_keywords ON papers.id = paper_keywords.id WHERE keyword LIKE ? GROUP BY title";
+      String topicSelectQuery = "SELECT papers.title, paper_keywords.keyword FROM papers JOIN paper_keywords ON papers.id = paper_keywords.id WHERE keyword LIKE ? GROUP BY title"";
       topics.add(topic);
         try {                                        
          result = mysql.getData(topicSelectQuery, topics);
