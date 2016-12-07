@@ -1,62 +1,44 @@
-/**Java Database Connectivity Final Project
-*Course Title: Java Data Connectivity and Access 
-*Course Number: ISTE-330
-*Instructor: Professor Floeser
-*@author Jenna Tillotson, Louis Trapani, Rosalee Hacker, Steven Ricci
-*@version 1.0, 12/7/2016
-*
-*Description: Collaboration
-*"This program conatins methods to support the collaboration table
-*in the database. This includes getting data from the database, setting data in the database, 
-*executing statementsand queries, describing tables."
-*
-*/
-
 import java.util.*;
 import java.sql.*;
 
 public class Collaboration {
    private int paperId;
-   private int userId;
+   private String username;
+   private String message;
     
    Database mysql = new Database();
     
-	/**
-	*Default Constructor
-	*/
+
 	public Collaboration() {} 
-    /**Constructor gets gets paperId and userId
-    *@param int- paperId
-    *@param int- userId
-    */
-    public Collaboration(int _paperId, int _userId) {
+    public Collaboration(int _paperId, String _username, String _message) {
          paperId = _paperId;
-         userId = _userId;
+         username = _username;
+         message = _message;
+         
     }
-    //accessor/mutators
-    /**Get int- paperId
-    *@return int- paperId 
-    */
+    
     public int getPaperId() {
     	return this.paperId;
     }
-    /**Set paperId
-    *@param int- paperId 
-    */
+    
     public void setPaperId(int _paperId) {
     	this.paperId = _paperId;
     }
-    /**Get userId
-    *@return int- userId 
-    */
-    public int getUserId() {
-    	return this.userId;
+    
+    public String getUsername() {
+    	return this.username;
     }
-    /**Set userId
-    *@param int- userId
-    */
-    public void setUserId(int _userId) {
-    	this.userId = _userId;
+    
+    public void setUsername(String _username) {
+    	this.username = _username;
+    }
+    
+    public String getMessage() {
+      return this.message;
+    }
+    
+    public void setMessage(String _message) {
+      this.message = _message;
     }
     
     
@@ -69,8 +51,7 @@ public class Collaboration {
    * If data is not avialable it will return false
    *
    * @param mysql - the database to use
-   * @return boolean true- for successful fetch
-   * @return boolean false- for unsuccessful fetch
+   * @return a boolean
    */
    
     public boolean fetch() throws DLException {
@@ -84,9 +65,9 @@ public class Collaboration {
         throw new DLException(dle, "fetch:46", "Can't Connect");
       }
       
-      String select = "SELECT * FROM " + "collaborations WHERE paperId = ?" + " AND userId = ?";
+      String select = "SELECT * FROM " + "collaborations WHERE paperId = ?" + " AND username = ?";
       strVals.add(Integer.toString(this.getPaperId()));
-      strVals.add(Integer.toString(this.getUserId()));
+      strVals.add(this.getUsername());
         try {                                        
          result = mysql.getData(select, strVals);
          if(result == null || result.size() == 0) {
@@ -97,7 +78,8 @@ public class Collaboration {
             }
          }
          this.setPaperId(Integer.parseInt(inner.get(0)));
-         this.setUserId(Integer.parseInt(inner.get(1)));         
+         this.setUsername(inner.get(1));
+         this.setMessage(inner.get(2));         
         } catch(DLException dle) {
            throw new DLException(dle, "fetch:55", "SELECT Statement Error");
         }      
@@ -113,15 +95,11 @@ public class Collaboration {
    * Authorship object that calls it.
    *
    * @param mysql - the database to use
-   * @param int- facultyId
-   * @param int- paperId
-   * @param int- key
-   * @return boolean true- successful update
-   * @return boolean false- unsuccessful update
+   * @return a boolean
    */
    
    //put method when searching by facultyId
-   public boolean put(int facultyId, int paperId, int key) throws DLException {  
+   public boolean put(int _paperId, String _username, String _message, int _key) throws DLException {  
    ArrayList<String> strVals = new ArrayList<String>();
    
       try {
@@ -130,14 +108,15 @@ public class Collaboration {
          throw new DLException(dle,"An Error Has Occurred", "put:128");
       }                                         
       
-      strVals.add(Integer.toString(facultyId));       
-      strVals.add(Integer.toString(paperId));
-      strVals.add(Integer.toString(key));       
+      strVals.add(Integer.toString(_paperId));       
+      strVals.add(_username);
+      strVals.add(_message);
+      strVals.add(Integer.toString(_key));       
                        
       try {
-         String update = "UPDATE Authorship SET facultyId = ?" + 
-                         ", paperId = ?"                       + 
-                         " WHERE facultyId = ?" + " AND paperId = ?";                                             
+         String update = "UPDATE collaborations SET paperId = ?" + 
+                         ", username = ?" + ", message = ?" + 
+                         " WHERE paperId = ?" + " AND username = ?";                                             
          mysql.setData(update, strVals);
       } catch(DLException dle) {
          throw new DLException(dle, "put:145", "UPDATE Statement Error");
@@ -155,16 +134,14 @@ public class Collaboration {
    * object that calls it.
    *
    * @param mysql - the database to use
-   * @param int- paperId
-   * @param int- userId
-   * @return boolean true- for successful post
-   * @return boolean false- for unsuccessful post
+   * @return a boolean
    */
-   public boolean post(int paperId,  int userId) throws DLException{
+   public boolean post(int _paperId,  String _username, String _message) throws DLException{
       ArrayList<String> strVals = new ArrayList<String>();
 
-      strVals.add(Integer.toString(paperId));      
-      strVals.add(Integer.toString(userId)); 
+      strVals.add(Integer.toString(_paperId));      
+      strVals.add(_username); 
+      strVals.add(_message);
          
       try {
          mysql.connect();                 
@@ -173,7 +150,7 @@ public class Collaboration {
       }
       
       try {   
-         String insert = "INSERT INTO Authorship VALUES(?" + ", ?" + ");";  
+         String insert = "INSERT INTO collaborations VALUES(?" + ", ?" + ", ?" + ");";  
          mysql.setData(insert, strVals);
       }catch(DLException dle) {
          throw new DLException(dle, "post:134", "INSERT Statement Error");
@@ -192,8 +169,7 @@ public class Collaboration {
    * Authorship object that cals it.
    *
    * @param mysql - the database to use
-   * @return boolean true- for successsful delete
-   * @return boolean false- for unsuccessful delete
+   * @return a boolean
    */
    
    //delete method by facultyId
@@ -201,7 +177,7 @@ public class Collaboration {
       ArrayList<String> strVals = new ArrayList<String>();
 
       strVals.add(Integer.toString(this.getPaperId()));    
-      strVals.add(Integer.toString(this.getUserId()));
+      strVals.add(this.getUsername());
              
       try {
          mysql.connect();                 
@@ -210,7 +186,7 @@ public class Collaboration {
       }   
       
       try {  
-         String deleteCommand = ("DELETE FROM Authorship WHERE paperId = ?" + " AND userId = ?"); 
+         String deleteCommand = ("DELETE FROM collaborations WHERE paperId = ?" + " AND username = ?"); 
          mysql.setData(deleteCommand, strVals);
         } catch(DLException dle) {
            throw new DLException(dle, "delete:170", "DELETE Statement Error");
