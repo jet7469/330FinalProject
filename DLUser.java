@@ -338,7 +338,9 @@ public class DLUser {
           throw new DLException(dle, "user fetch:66", "Can't Connect");
        }
       
-      String facultySelectQuery = "SELECT lName FROM faculty WHERE lName LIKE ?";
+      String facultySelectQuery = "SELECT faculty.lName, papers.title FROM faculty JOIN " + 
+        "authorship ON authorship.facultyID = faculty.id JOIN papers ON papers.id = " + 
+        "authorship.paperId WHERE lName LIKE ?";
       facNames.add(facName);
         try {                                        
          result = mysql.getData(facultySelectQuery, facNames);
