@@ -22,8 +22,8 @@ public class DLException extends Exception {
 
    /** Constructor that takes Exception and array of Strings
    *@param exception variable
-   *@param business layer message
-   *@param String of messages
+   *@param String- business layer message
+   *@param String...- messages
    */
    public DLException(Exception e, String blMsg, String... msgs) {
       super(blMsg);
@@ -32,6 +32,7 @@ public class DLException extends Exception {
 
    /**
    * Constructor that takes Excpeption
+   *@param e- Exception
    */
    public DLException(Exception e) {
       this(e, "An Error Has Occurred");
@@ -45,8 +46,8 @@ public class DLException extends Exception {
    * are occurring
    *
    * @param e - an Exception
-   * @param blMsg - a String for business layer message
-   * @param msgs - array of Strings for various log readings
+   * @param String blMsg - a String for business layer message
+   * @paramString... msgs - array of Strings for various log readings
    */
    public void log(Exception e, String blMsg, String... msgs) {
       try{
