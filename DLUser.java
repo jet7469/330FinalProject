@@ -37,16 +37,16 @@ public class DLUser {
   */
    public DLUser() {}
   /**Constructor gets username
-  *@param username 
+  *@param String- username 
   */ 
    public DLUser(String _username) {
       username = _username;
    }
    /**Constructor gets all attributes
-   *@param username
-   *@param password
-   *@param name
-   *@param access 
+   *@param String- username
+   *@param String- password
+   *@param String- name
+   *@param String- access 
    */
    public DLUser(String _username, String _password, String _name, String _access) {
       username = _username;
@@ -57,49 +57,49 @@ public class DLUser {
    
    // Accessors and Mutators
    /**Get username
-   *@return username String
+   *@return String- username 
    */
    protected String getUsername(){
 	return this.username;
    }
    /**Set username
-   *@param username String
+   *@param String- username 
    */
    protected void setUsername(String _username){
 	this.username = _username;
    }
    /**Get password
-   *@return password String
+   *@return String- password 
    */
    protected String getPassword(){
 	return this.password;
    }
    /**Set password
-   *@param password String
+   *@param String- password 
    */
    protected void setPassword(String _password){
 	this.password = _password;
    } 
    /**Get name
-   *@return name String
+   *@return String- name 
    */
    protected String getName(){
 	return this.name;
    }
    /**Set name
-   *@param name String
+   *@param String name 
    */
    protected void setName(String _name){
 	this.name = _name;
    } 
    /**Get access
-   *@return access String
+   *@return String- access 
    */
    protected String getAccess(){
 	return this.access;
    }  
    /**Set access
-   *@param access String
+   *@param String- access 
    */
    protected void setAccess(String _access){
 	this.access = _access;
@@ -115,7 +115,8 @@ public class DLUser {
    * If data is not avialable it will return false
    *
    * @param mysql - the database to use
-   * @return a boolean
+   * @return boolean true- for successful fetch
+   * @return boolean false- for unsuccessful fetch
    */
    protected boolean fetch() throws DLException {
       ArrayList<ArrayList<String>> result;
@@ -158,7 +159,13 @@ public class DLUser {
    * object that calls it.
    *
    * @param mysql - the database to use
-   * @return a boolean
+   * @param String- username
+   * @param String- password
+   * @param String- name
+   * @param STring- access
+   * @param String- key
+   * @return boolean true- for successful update
+   * @return boolean false- for unsuccessful update
    */
    public boolean put(String _username, String _password, String _name, String _access,  String _key) throws DLException {  
    ArrayList<String> strVals = new ArrayList<String>();
@@ -195,7 +202,12 @@ public class DLUser {
    * object that calls it.
    *
    * @param mysql - the database to use
-   * @return a boolean
+   * @param String- username
+   * @param String- password
+   * @param String- name
+   * @param String- access
+   * @reutrn boolean true- for successful post
+   * @return boolean false- for unsuccessful post
    */
    public boolean post(String _username, String _password, String _name, String _access) throws DLException{
       ArrayList<String> strVals = new ArrayList<String>();
@@ -230,7 +242,8 @@ public class DLUser {
    * object that cals it.
    *
    * @param mysql - the database to use
-   * @return a boolean
+   * @return boolean true- for successful delete
+   * @return boolean false- for unsuccessful delete
    */
    public boolean delete() throws DLException {
       ArrayList<String> strVals = new ArrayList<String>();
@@ -259,9 +272,10 @@ public class DLUser {
    * the rest of the user info will be filled in. If not,
    * false will be returned.
    *
-   * @param username - users username
-   * @param password - users password
-   * @return boolean
+   * @param String - users username
+   * @param String - users password
+   * @return boolean true- for successful login
+   * @return boolean flase- for unsuccessful login
    */ 
    protected boolean login(String _username, String _password) throws DLException, Exception {
       DLUser checkUser = new DLUser(_username);
@@ -299,8 +313,8 @@ public class DLUser {
    }//end login()
 	
    /**Search by Keyword
-   *@param keyword String
-   *@return resultset
+   *@param String- keyword
+   *@return resultset- from keyword search
    */
    public ArrayList<ArrayList<String>> searchKeyword(String keyword) throws DLException {
       ArrayList<ArrayList<String>> result;
@@ -325,8 +339,8 @@ public class DLUser {
    }
 	
    /**Search by Faculty Name
-   *@param faculty name String
-   *@return resultset
+   *@param String- facName
+   *@return resultset- from faculty search
    */
    public ArrayList<ArrayList<String>> searchFac(String facName) throws DLException {
       ArrayList<ArrayList<String>> result;
@@ -353,8 +367,8 @@ public class DLUser {
    }//end searchKeyWord()
 	
    /**Search by topic
-   *@param topic String
-   *@return resultset
+   *@param string- topic 
+   *@return resultset- from topic search
    */
     public ArrayList<ArrayList<String>> searchTopics(String topic) throws DLException {
       ArrayList<ArrayList<String>> result;
