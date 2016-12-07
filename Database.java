@@ -419,5 +419,25 @@ public class Database {
       } catch(SQLException sqle) {
          throw new DLException(sqle, "An Error Has Occurred", "commitTrans:391", "Could Not Commit Transaction");
       }
-   }     
+   }
+   
+   /**Convert 2D arrayList result set to 2d array for JTable
+   *@param ArrayList datalist
+   *@return newData
+   */
+   public Object[][] convert(ArrayList<ArrayList<String>>dataList) {
+      
+      int numRows = dataList.size()-1; //total rows -1 bc the first row is column names
+      Object [][] newData = new Object [numRows][4]; //4 bc there are 4 columns of data
+      
+      //start at 1 because dataList.get(0) is the column names 
+      for (int i = 1; i < dataList.size(); i++) {  
+         //loop through the arraylist within arraylist
+         for (int j = 0; j < dataList.get(i).size(); j++) {
+            newData[i-1][j] = (Object) dataList.get(i).get(j);
+         }
+      }
+      return newData;
+   }
+     
 }

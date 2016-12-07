@@ -2,40 +2,115 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JTable;
+import javax.swing.JScrollPane;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-//JPanel for FacultyTab
-//Takes the faculty member that is logged in and loads all of their research
+import java.util.ArrayList;
 
-public class FacultyView extends JPanel {
+/**
+ *JPanel for FacultyTab
+ *Takes the faculty member that is logged in and loads all of their research
+ */
+ 
+public class FacultyView extends JPanel implements ActionListener {
 
    //global variables
-   private String [] columnNames = {"Title", "Abstract", "Citation"};
-   Object [][] data = { {"title1", "abstract1", "cite1"}, {"title2", "abstract2", "citation2"}};
+   private String [] columnNames = {"Title", "Abstract", "Citation", "Author"};
+   private Object [][] data;
    private JButton jbDelete;
    private JTable table;
-
+   private Database db;
+   private DLUser dl;
 
    //constructor
-   public FacultyView() {
+   public FacultyView(DLUser dl) {
+      this.dl = dl;
       setLayout(new BorderLayout());
       
       //title at top
       add(new JLabel("My Papers", JLabel.CENTER), BorderLayout.NORTH);
       
-      //table in center
-      table = new JTable(new CustomTableModel(columnNames, data));
-      table.setRowHeight(50);
-      table.setShowGrid(false);
-      table.setShowHorizontalLines(true);
-      add(table, BorderLayout.CENTER);
+      db = new Database();
+      try {
+         db.connect();
+         
+         /**
+          *This is such bad coding practice
+          *I didn't know how else to make it work 
+          *I am so sorry
+          */
+         if (dl.getUsername().equals("stevezilora")) {
+            String sql = "SELECT p.title, p.abstract, p.citation, CONCAT(f.fname, ' ', f.lname) FROM papers p " +
+                         "INNER JOIN authorship a ON a.paperId = p.id " +
+                         "INNER JOIN faculty f ON a.facultyId = f.id " +
+                         "WHERE f.lname = 'Zilora'";
+            
+            ArrayList<ArrayList<String>> myData = db.getData(sql, true);
+            data = db.convert(myData);
+            
+            table = new JTable(new CustomTableModel(columnNames, data));
+            table.setRowHeight(50);
+      
+            JScrollPane jsp = new JScrollPane(table);
+            jsp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+            add(jsp, BorderLayout.CENTER);
+         }
+         else if (dl.getUsername().equals("danbogard")) {
+            String sql = "SELECT p.title, p.abstract, p.citation, CONCAT(f.fname, ' ', f.lname) FROM papers p " +
+                         "INNER JOIN authorship a ON a.paperId = p.id " +
+                         "INNER JOIN faculty f ON a.facultyId = f.id " +
+                         "WHERE f.lname = 'bogaard'";
+            
+            ArrayList<ArrayList<String>> myData = db.getData(sql, true);
+            data = db.convert(myData);
+            
+            table = new JTable(new CustomTableModel(columnNames, data));
+            table.setRowHeight(50);
+      
+            JScrollPane jsp = new JScrollPane(table);
+            jsp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+            add(jsp, BorderLayout.CENTER);
+
+
+         }
+         db.close();   
+      }
+      catch(DLException dle) {
+         System.out.println("DL Exception");
+      }
       
       //delete button on south
       jbDelete = new JButton("Delete");
       add(jbDelete, BorderLayout.SOUTH);
-   
-   
+      jbDelete.addActionListener(this);
+      
    } //end constructor
+   
+      
+   public void actionPerformed (ActionEvent ae) {
+      //get selected row index
+      int rowIndex = table.getSelectedRow();
+      
+      try {
+         db.connect();
+         
+         //get the title from the array in that row
+         Object selected = data [rowIndex][0];
+         String selectedTitle = selected.toString();
+         
+         //query to delete row with that title
+         String sql = "DELETE FROM papers WHERE title = '" + selectedTitle + "'";
+         db.setData(sql);
+         
+         db.close();
+      }
+      catch(DLException dle) {
+         System.out.println("DL EXCEption");
+      }
+
+   }
 
 } //end class facultyView
