@@ -21,6 +21,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
@@ -40,12 +41,12 @@ public class LogInView extends JFrame implements ActionListener {
    //variables for logging in with exisiting account
    JLabel existingAccount;
    JTextField existingUsername;
-   JTextField existingPassword;
+   JPasswordField existingPassword;
    JButton login;
    //variables for creating a new account
    JLabel newAccount;
    JTextField newUsername;
-   JTextField newPassword;
+   JPasswordField newPassword;
    JTextField newName;
    JButton newAccountSubmit;
 
@@ -68,7 +69,7 @@ public class LogInView extends JFrame implements ActionListener {
       west.setBorder(new EmptyBorder(70, 100, 100, 00));
       existingAccount = new JLabel("Have an account?");
       existingUsername = new JTextField();
-      existingPassword = new JTextField();
+      existingPassword = new JPasswordField();
       login = new JButton("Submit");
       login.addActionListener(this);
       west.add(existingAccount);
@@ -84,7 +85,7 @@ public class LogInView extends JFrame implements ActionListener {
       east.setBorder(new EmptyBorder(70, 100, 100, 100));
       newAccount = new JLabel("First time here as a student?");
       newUsername = new JTextField();
-      newPassword = new JTextField();
+      newPassword = new JPasswordField();
       newName = new JTextField();
       newAccountSubmit = new JButton("Submit");
       newAccountSubmit.addActionListener(this);
