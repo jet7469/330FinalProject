@@ -26,22 +26,22 @@ public class Faculty extends DLUser {
 
    private Database mysql = new Database();
 
-   /**Default Construstor
-   *@param no parameters
+   /**
+   *Default Constructor
    */
    public Faculty() {}
    /**Constructor
-   *@param id of faculty member
+   *@param int- id of faculty member
    */
    public Faculty(int _id) {
       id = _id;
    }
    /**Constructor
-   *@param id of faculty member
-   *@param first name of faculty member
-   *@param last name of faculty member
-   *@param password
-   *@param email
+   *@param int- id of faculty member
+   *@param String- firstName of faculty member
+   *@param String- lastName of faculty member
+   *@param String- password
+   *@param String- email
    */
    public Faculty(int _id, String _fName, String _lName, String _password, String _email) {
       id = _id;
@@ -53,58 +53,61 @@ public class Faculty extends DLUser {
    
    // Accessors and Mutators
    /**Gets the Id of faculty 
-   *@return int id
+   *@return int- id
    */
    public int getId(){
       return this.id;
    }
    /**Sets the Id of faculty
-   *@param id of faculty
+   *@param int- id of faculty
    */
    public void setId(int _id) {
       this.id = _id;
    }
    /**gets the first name
-   *@return String first name
+   *@return String- first name
    */
    public String getFName() {
       return this.fName;
    }
+   /**Get first name
+   *@return String- firstName
+   */
    public void setFName(String _fName) {
       this.fName = _fName;
    }
    /**gets the last name
-   *@return last name String
+   *@return String- lastName
    */
    public String getLName() {
       return this.lName;
    }
    /**Sets the last name
-   *@param last name of faculty
+   *@param String- last name of faculty
    */
    public void setLName(String _lName) {
       this.lName = _lName;
    }
    /**gets the password
-   *@return password String
+   *@return String- password 
    */
    public String getPassword() {
       return this.password;
    }
    /**Sets the password
-   *@param password String
+   *@param String- password 
    */
    public void setPassword(String _password) {
       this.password = _password;
    }
    /**gets the Email
-   *@return email String
+   *@return String- email
    */
    public String getEmail() {
       return this.email;
    }
    /**sets the Email
-   *@param Email String
+   *@param String- Email 
    */
    public void setEmail(String _email) {
       this.email = _email;
@@ -120,7 +123,8 @@ public class Faculty extends DLUser {
    * If data is not avialable it will return false
    *
    * @param mysql - the database to use
-   * @return a boolean
+   * @return boolean true- for successful fetch
+   * @return boolean false- empty result
    */
    public boolean fetch() throws DLException {
       ArrayList<ArrayList<String>> result;
@@ -166,7 +170,13 @@ public class Faculty extends DLUser {
    * Equipment object that calls it.
    *
    * @param mysql - the database to use
-   * @return a boolean
+   * @param int- id
+   * @param String- firstName
+   * @param String- password
+   * @param String- email
+   * @param int- key
+   * @return boolean true- successful update
+   * @return boolean false- unsuccssful update
    */
    public boolean put(int id, String fname, String lname, String password, String email, int key) throws DLException {  
    ArrayList<String> strVals = new ArrayList<String>();
@@ -207,7 +217,12 @@ public class Faculty extends DLUser {
    * object that calls it.
    *
    * @param mysql - the database to use
-   * @return a boolean
+   * @param int- id
+   * @param String- firstName
+   * @param String- password
+   * @param String- email
+   * @return boolean true- successful insert
+   * @return boolean false- unsuccssful insert
    */
    public boolean post(int id, String fname, String lname, String password, String email) throws DLException{
       ArrayList<String> strVals = new ArrayList<String>();
@@ -243,7 +258,8 @@ public class Faculty extends DLUser {
    * Equipment object that cals it.
    *
    * @param mysql - the database to use
-   * @return a boolean
+   * @return boolean true- successful delete
+   * @return boolean false- unsuccessful delete
    */
    public boolean delete() throws DLException {
       ArrayList<String> strVals = new ArrayList<String>();
@@ -268,7 +284,7 @@ public class Faculty extends DLUser {
    /**The Swap method creates an object of the Faculty class and fetches data,
    *the data fetched is then swaped with another object in a transaction, a rollback
    *if the swap fails
-   *@param id of the faculty object
+   *@param int- id of the faculty object
    */
    public void swap(int id2) throws DLException {
       Faculty fac2 = new Faculty(id2); 
