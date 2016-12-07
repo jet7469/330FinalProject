@@ -28,7 +28,7 @@ public class MainView extends JFrame {
       
       //faculty viewing tab -- only viewable if faculty
       if (dl.getAccess().equals("Faculty")) {
-         facultyTab = new FacultyView();
+         facultyTab = new FacultyView(dl);
          jtp.add("My Research", facultyTab);
       }
       
