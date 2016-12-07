@@ -1,6 +1,7 @@
 import javax.swing.JFrame;
-import javax.swing.JTabbedPane;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 
 //GUI class
 
@@ -27,21 +28,28 @@ public class MainView extends JFrame {
       
       
       //faculty viewing tab -- only viewable if faculty
-      if (dl.getAccess().equals("Faculty")) {
+      try {
+         if (dl.getAccess().equals("Faculty")) {
          facultyTab = new FacultyView(dl);
          jtp.add("My Research", facultyTab);
+         }
+      
+         //research viewing tab
+         researchTab = new ResearchView();
+         jtp.add("All Research", researchTab);
+
+         //add research tab -- only viewable if admin or faculty
+         if (dl.getAccess().equals("Faculty") || dl.getAccess().equals("Admin")) {
+            postTab = new PostView(dl);
+            jtp.add("Post", postTab);
+         }
       }
-      
-      //research viewing tab
-      researchTab = new ResearchView();
-      jtp.add("All Research", researchTab);
-      
-      //add research tab -- only viewable if admin or faculty
-      if (dl.getAccess().equals("Faculty") || dl.getAccess().equals("Admin")) {
-         postTab = new PostView(dl);
-         jtp.add("Post", postTab);
-      }
-      
+      } catch (NullPointerException npe) {
+          System.out.println("Exception occured");
+          JOptionPane.showMessageDialog(this, "<html>Error loggin in. Check the following:" +
+                "<br>1. You have filled out all the fields<br>2. Username is correct" +
+                "<br>3. Password is correct<br>4. Your account exists ");
+       }
       if (dl.getAccess().equals("Admin")) {
          addTab = new AddView();
          jtp.add("Add Faculty", addTab);
