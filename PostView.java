@@ -22,6 +22,7 @@ public class PostView extends JPanel implements ActionListener {
    private JTextField jtfTitle;
    private JTextField jtfAbstract;
    private JTextField jtfCitation;
+   private JTextField jtfAuthor;
    private DLUser dl;
       
    private JButton jbSubmit;
@@ -49,6 +50,10 @@ public class PostView extends JPanel implements ActionListener {
       jtfCitation = new JTextField();
       jpCenter.add(jtfCitation);
       
+      jpCenter.add(new JLabel("Author ID:", JLabel.RIGHT));
+      jtfAuthor = new JTextField();
+      jpCenter.add(jtfAuthor);
+      
       add(jpCenter, BorderLayout.CENTER);
       
       //south of panel
@@ -62,6 +67,7 @@ public class PostView extends JPanel implements ActionListener {
          String newTitle = jtfTitle.getText();
          String newAbstract = jtfAbstract.getText();
          String newCitation = jtfCitation.getText();
+         int newId = Integer.parseInt(jtfAuthor.getText());
                   
          Papers newPaper = new Papers();
          Authorship au = new Authorship();
@@ -70,10 +76,11 @@ public class PostView extends JPanel implements ActionListener {
             newPaper.post(newTitle, newAbstract, newCitation);
             newPaper.fetch();
             int paperid = dl.createCollaboration(newTitle);
-            au.post(1, paperid); 
+            au.post(newId, paperid); 
             jtfTitle.setText("");
             jtfAbstract.setText("");
             jtfCitation.setText("");
+            jtfAuthor.setText("");
          }
          catch(Exception e) {
             JOptionPane.showMessageDialog(this, "Error creating account.");
