@@ -43,7 +43,6 @@ public class MainView extends JFrame {
             postTab = new PostView(dl);
             jtp.add("Post", postTab);
          }
-      }
       } catch (NullPointerException npe) {
           System.out.println("Exception occured");
           JOptionPane.showMessageDialog(this, "<html>Error loggin in. Check the following:" +
