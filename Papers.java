@@ -39,17 +39,17 @@ public class Papers {
       citation = "";
    }
    /**Constructor with id
-   *@param id int
+   *@param int- id
    */
    public Papers(int _id) {
       id = _id;
    }
    
    /**Contructor with all parameters
-   *@param id
-   *@param title
-   *@param abstract test
-   *@param citation
+   *@param int- id
+   *@param String- title
+   *@param String- abstract test
+   *@param String- citation
    */
    public Papers(int _id, String _title, String _abstractText, String _citation) throws DLException {
       id = _id;
@@ -60,25 +60,25 @@ public class Papers {
    
    //accessors
    /**Get id
-   *@return id int
+   *@return int- id
    */
    public int getId() {
       return id;
    }
    /**Get Title
-   *@return title String
+   *@return String- title 
    */
    public String getTitle() {
       return title;
    }
    /**Get Abstract Text
-   *@return Abstract Text String
+   *@return String- Abstract Text
    */
    public String getAbstractText() {
       return abstractText;
    }
    /**Get Citation
-   *@return citation
+   *@return String- citation
    */
    public String getCitation() {
       return citation;
@@ -86,25 +86,25 @@ public class Papers {
    
    //mutators
    /**Set id
-   *@param id int
+   *@param int- id 
    */
    public void setId(int _id) {
       id = _id;
    }
    /**Set title
-   *@param title String
+   *@param String- title 
    */
    public void setTitle(String _title) {
       title = _title;
    }
    /**Set Abstract Text
-   *@param abstract text String
+   *@param String- abstract text
    */
    public void setAbstractText(String _abstractText) {
       abstractText = _abstractText;
    }
    /**Set Citation
-   *@param citation String
+   *@param String- citation 
    */
    public void setCitation(String _citation) {
       citation = _citation;
@@ -119,7 +119,8 @@ public class Papers {
    * If data is not avialable it will return false
    *
    * @param mysql - the database to use
-   * @return a boolean
+   * @return boolean true- for successful fetch
+   * @return boolean false- for unsuccessful fetch
    */
   public boolean fetch() throws DLException {
       ArrayList<ArrayList<String>> result;
@@ -168,7 +169,13 @@ public class Papers {
    * Equipment object that calls it.
    *
    * @param mysql - the database to use
-   * @return a boolean
+   * @param int- id
+   * @param String- title
+   * @param string abstractText
+   * @param String- citation
+   * @param int- key
+   * @return boolean true- for successful update
+   * @return boolean false- for unsuccessful update
    */
    public boolean put(int id, String title, String abstractText, String citation, int key) throws DLException {  
    ArrayList<String> strVals = new ArrayList<String>();
@@ -205,8 +212,12 @@ public class Papers {
    * using a mySQL CREATE statement for the Equipment
    * object that calls it.
    *
-   * @param mysql - the database to use
-   * @return a boolean
+   * @param int- id
+   * @param String- title
+   * @param string abstractText
+   * @param String- citation
+   * @return boolean true- for successful post
+   * @return boolean false- for unsuccessful post
    */
    public boolean post(int id, String title, String abstractText, String citation) throws DLException{
       ArrayList<String> strVals = new ArrayList<String>();
@@ -240,7 +251,8 @@ public class Papers {
    * Equipment object that cals it.
    *
    * @param mysql - the database to use
-   * @return a boolean
+   * @return boolean true- successful delete
+   * @return boolean false- unsuccessful delete
    */
    public boolean delete() throws DLException {
       ArrayList<String> strVals = new ArrayList<String>();
