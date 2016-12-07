@@ -107,7 +107,7 @@ public class SearchView extends JPanel implements ActionListener {
                   keywordString = keywordString.concat(results.get(i).get(j)) + "\n";
                }
             }
-            JOptionPane.showMessageDialog(this, "<html>Search results of keyword input:<br>" + keywordString);
+            JOptionPane.showMessageDialog(this, "<html>Keyword search results of '" + keyword + "':<br>" + keywordString);
          } catch (Exception e) {
             System.out.println("Error retreiving keyword search");
          }   
@@ -126,7 +126,7 @@ public class SearchView extends JPanel implements ActionListener {
                   facultyString = facultyString.concat(results.get(i).get(j)) + "\n";
                }
             }
-            JOptionPane.showMessageDialog(this, "<html>Search results of faculty input:<br>" + facultyString);
+            JOptionPane.showMessageDialog(this, "<html>Faculty search results of '" + facName + "':<br>" + facultyString);
          } catch (Exception e) {
             System.out.println("Error retreiving faculty search");
          }   
@@ -144,7 +144,7 @@ public class SearchView extends JPanel implements ActionListener {
                   topicString = topicString.concat(results.get(i).get(j)) + "\n";
                }
             }
-            JOptionPane.showMessageDialog(this, "<html>Search results of faculty input:<br>" + topicString);
+            JOptionPane.showMessageDialog(this, "<html>Topic search results of '" + topic + "':<br>" + topicString);
          } catch (Exception e) {
             System.out.println("Error retreiving topic search");
          }   
