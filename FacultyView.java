@@ -1,3 +1,17 @@
+/**Java Database Connectivity Final Project
+*Course Title: Java Data Connectivity and Access 
+*Course Number: ISTE-330
+*Instructor: Professor Floeser
+*@author Jenna Tillotson, Louis Trapani, Rosalee Hacker, Steven Ricci
+*@version 1.0, 12/7/2016
+*
+*Description: Faculty View Class
+*"This program conatins methods to create a JPanel for the Faculty tab
+*in the GUI. Program takes the faculty memeber that is logged in 
+*and loads all of their research."
+*
+*/
+
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -25,9 +39,12 @@ public class FacultyView extends JPanel implements ActionListener {
    private Database db;
    private DLUser dl;
 
-   //constructor
+
+   /**
+   *Constructor
+   */
    public FacultyView(DLUser dl) {
-      this.dl = dl;
+
       setLayout(new BorderLayout());
       
       //title at top

@@ -82,6 +82,11 @@ public class SearchView extends JPanel implements ActionListener {
    } //end constructor
    
    /**establishing the action event using the action performed method
+   *For each jtextfield, there is a check to see if there is a value entered.
+   *If there is a value, the value is storred and passed as a parameter for
+   *the prepared statement in the DLUser. The results from the query are
+   *stored in an arraylist and are looped through to grab all data, then added
+   *to a string. The string is then added to a JOptionPane to the user.
    *@param ActionEvent attribute
    */
    public void actionPerformed(ActionEvent ae) {

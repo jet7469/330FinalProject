@@ -1,3 +1,16 @@
+/**Java Database Connectivity Final Project
+*Course Title: Java Data Connectivity and Access 
+*Course Number: ISTE-330
+*Instructor: Professor Floeser
+*@author Jenna Tillotson, Louis Trapani, Rosalee Hacker, Steven Ricci
+*@version 1.0, 12/7/2016
+*
+*Description: Data Layer Exception Class
+*"This Class creats custom exceptions to handle various errors that may occur
+*and also log these thrown exceptions to know what error occured."
+*
+*/
+
 import java.util.*;
 import java.io.*;
 import java.sql.*;
@@ -7,8 +20,10 @@ public class DLException extends Exception {
    Timestamp ts = new Timestamp(System.currentTimeMillis());
    File file;
 
-   /**
-   * Constructor that takes Exception and array of Strings
+   /** Constructor that takes Exception and array of Strings
+   *@param exception variable
+   *@param String- business layer message
+   *@param String...- messages
    */
    public DLException(Exception e, String blMsg, String... msgs) {
       super(blMsg);
@@ -17,6 +32,7 @@ public class DLException extends Exception {
 
    /**
    * Constructor that takes Excpeption
+   *@param e- Exception
    */
    public DLException(Exception e) {
       this(e, "An Error Has Occurred");
@@ -30,8 +46,8 @@ public class DLException extends Exception {
    * are occurring
    *
    * @param e - an Exception
-   * @param blMsg - a String for business layer message
-   * @param msgs - array of Strings for various log readings
+   * @param String blMsg - a String for business layer message
+   * @paramString... msgs - array of Strings for various log readings
    */
    public void log(Exception e, String blMsg, String... msgs) {
       try{

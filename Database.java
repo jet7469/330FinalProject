@@ -31,7 +31,7 @@ public class Database {
       uri = "jdbc:mysql://127.0.0.1/FacResearchDB?useSSL=false";
       driver = "com.mysql.jdbc.Driver";
       username = "root";
-      password = "RITinn244"; // enter your mysql password
+      password = ""; // enter your mysql password
       
       System.out.println(uri + driver + username + password);
       
@@ -56,10 +56,10 @@ public class Database {
    
    /**
    * connect method loads mysql driver
-   * connects to database and returns true if 
-   * successful.
+   * connects to database
    *
-   * @return boolean
+   * @return boolean true if connection successful
+   * @return false for failed connection
    */
    public boolean connect() throws DLException {
       System.out.println("SPOT 2: " + uri + driver + username + password);
@@ -82,7 +82,8 @@ public class Database {
    * java object and mysql database. Returns 
    * true if successful.
    *
-   * @return boolean
+   * @return boolean true for successful close
+   * @return boolean false for failed close
    */
    public boolean close() throws DLException {
       // close the database
@@ -106,7 +107,7 @@ public class Database {
    * into an ArrayList one field at a time.   
    * 
    * @param sql - a string that contains mySQL select statement
-   * @return - ArrayList<ArrayList<String>> 
+   * @return -lst ArrayList<ArrayList<String>> 
    */
    public ArrayList<ArrayList<String>> getData(String sqlQuery) throws DLException {
       ArrayList<ArrayList<String>> lst = new ArrayList<ArrayList<String>>();
@@ -185,7 +186,8 @@ public class Database {
    * if succesful it will return true.
    *
    * @param sql - a string of mySQL statement (create, update, delete)
-   * @return - boolean 
+   * @return - boolean true for sucessfull update
+   * 
    */
    public Boolean setData(String sqlQuery) throws DLException {
       try {
@@ -277,7 +279,7 @@ public class Database {
    *
    * @param sqlQuery - an sql statement
    * @param strVals - an arrayList of String values
-   * @return - a PreparedStatement
+   * @return - a PreparedStatement 
    */
    public PreparedStatement prepare(String sqlQuery, ArrayList<String> strVals) throws DLException {
    
@@ -299,7 +301,7 @@ public class Database {
    * 
    * @param sqlQuery - an sql statement
    * @param strVals - an arrayList of String values
-   * @return - ArrayList<ArrayList<String>>
+   * @return - lst ArrayList<ArrayList<String>>
    */   
    public ArrayList<ArrayList<String>> getData(String sqlQuery, ArrayList<String> strVals) throws DLException {
       ArrayList<ArrayList<String>> lst = new ArrayList<ArrayList<String>>();
@@ -331,7 +333,8 @@ public class Database {
    *
    * @param sqlQuery - an sql statement
    * @param strVals - an arrayList of String values
-   * @return - a boolean
+   * @return - a boolean true for successful set data
+   * @return - a boolean false for failed set data
    */
    public boolean setData(String sqlQuery, ArrayList<String> strVals) throws DLException {
       ArrayList<ArrayList<String>> lst = new ArrayList<ArrayList<String>>();
@@ -352,7 +355,7 @@ public class Database {
    *
    * @param sqlQuery - an sql statement
    * @param strVals - an arrayList of String values
-   * @return - an int
+   * @return - an int result
    */   
    public int executeStmt(String sqlQuery, ArrayList<String> strVals) throws DLException {
       try{
