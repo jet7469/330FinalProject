@@ -1,16 +1,3 @@
-/**Java Database Connectivity Final Project
-*Course Title: Java Data Connectivity and Access 
-*Course Number: ISTE-330
-*Instructor: Professor Floeser
-*@author Jenna Tillotson, Louis Trapani, Rosalee Hacker, Steven Ricci
-*@version 1.0, 12/7/2016
-*
-*Description: Post View Class
-*"This program conatins methods to support the creation
-*of a JPanel for our Post table in the GUI. ActionListener 
-*was implementd for events."
-*/
-
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Dimension;
@@ -35,13 +22,13 @@ public class PostView extends JPanel implements ActionListener {
    private JTextField jtfTitle;
    private JTextField jtfAbstract;
    private JTextField jtfCitation;
+   private DLUser dl;
       
    private JButton jbSubmit;
 
-   /**
-   *Constructor
-   */
-   public PostView() {
+   //constructor
+   public PostView(DLUser _dl) {
+      dl = _dl;
       setLayout(new BorderLayout());
       
       //north of panel
@@ -71,18 +58,19 @@ public class PostView extends JPanel implements ActionListener {
       jbSubmit.setPreferredSize(new Dimension(20, 40));
    } //end constructor
    
-      /**Implementing actionPerformed event
-      *@param ActionEvent attribute
-      */
       public void actionPerformed(ActionEvent ae) {
          String newTitle = jtfTitle.getText();
          String newAbstract = jtfAbstract.getText();
          String newCitation = jtfCitation.getText();
-         
-         
+                  
          Papers newPaper = new Papers();
+         Authorship au = new Authorship();
+         
          try {
-            newPaper.post(0, newTitle, newAbstract, newCitation);
+            newPaper.post(newTitle, newAbstract, newCitation);
+            newPaper.fetch();
+            int paperid = dl.createCollaboration(newTitle);
+            au.post(1, paperid); 
             jtfTitle.setText("");
             jtfAbstract.setText("");
             jtfCitation.setText("");

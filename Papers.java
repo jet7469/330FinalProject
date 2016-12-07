@@ -1,17 +1,3 @@
-/**Java Database Connectivity Final Project
-*Course Title: Java Data Connectivity and Access 
-*Course Number: ISTE-330
-*Instructor: Professor Floeser
-*@author Jenna Tillotson, Louis Trapani, Rosalee Hacker, Steven Ricci
-*@version 1.0, 12/7/2016
-*
-*Description: Papers Data Layer Class
-*"This program conatins methods to support Paper table in the Database. Including
-*connection to the database,
-*getting data from the data, setting data in the database, executing statments
-*and queries, describing tables and our class uses transactions"
-*
-*/
 import java.sql.*;
 import java.util.*;
 
@@ -29,28 +15,20 @@ public class Papers {
    
    private Database mysql = new Database();
 
-    /**
-    *Default Constructor
-    */
+
+   //default constructor
    public Papers() {
       id = 0;
       title = "";
       abstractText = "";
       citation = "";
    }
-   /**Constructor with id
-   *@param int- id
-   */
+   
    public Papers(int _id) {
       id = _id;
    }
    
-   /**Contructor with all parameters
-   *@param int- id
-   *@param String- title
-   *@param String- abstract test
-   *@param String- citation
-   */
+   //parameterized constructor
    public Papers(int _id, String _title, String _abstractText, String _citation) throws DLException {
       id = _id;
       title = _title;
@@ -59,69 +37,39 @@ public class Papers {
    }
    
    //accessors
-   /**Get id
-   *@return int- id
-   */
    public int getId() {
       return id;
    }
-   /**Get Title
-   *@return String- title 
-   */
+   
    public String getTitle() {
       return title;
    }
-   /**Get Abstract Text
-   *@return String- Abstract Text
-   */
+   
    public String getAbstractText() {
       return abstractText;
    }
-   /**Get Citation
-   *@return String- citation
-   */
+   
    public String getCitation() {
       return citation;
    }
    
    //mutators
-   /**Set id
-   *@param int- id 
-   */
    public void setId(int _id) {
       id = _id;
    }
-   /**Set title
-   *@param String- title 
-   */
+   
    public void setTitle(String _title) {
       title = _title;
    }
-   /**Set Abstract Text
-   *@param String- abstract text
-   */
+   
    public void setAbstractText(String _abstractText) {
       abstractText = _abstractText;
    }
-   /**Set Citation
-   *@param String- citation 
-   */
+   
    public void setCitation(String _citation) {
       citation = _citation;
    }
    
-    /** 
-   *  fetch method calls getData with a mySQL SELECT
-   * statement to retrieve an entry from the DB.
-   * Once entry is retrieved it will check if there
-   * is data available. If so, it will set the object
-   * attributes with that information and return true.
-   * If data is not avialable it will return false
-   *
-   * @param mysql - the database to use
-   * @return boolean true- for successful fetch
-   * @return boolean false- for unsuccessful fetch
-   */
   public boolean fetch() throws DLException {
       ArrayList<ArrayList<String>> result;
       ArrayList<String> inner = new ArrayList<>();
@@ -169,13 +117,7 @@ public class Papers {
    * Equipment object that calls it.
    *
    * @param mysql - the database to use
-   * @param int- id
-   * @param String- title
-   * @param string abstractText
-   * @param String- citation
-   * @param int- key
-   * @return boolean true- for successful update
-   * @return boolean false- for unsuccessful update
+   * @return a boolean
    */
    public boolean put(int id, String title, String abstractText, String citation, int key) throws DLException {  
    ArrayList<String> strVals = new ArrayList<String>();
@@ -212,14 +154,10 @@ public class Papers {
    * using a mySQL CREATE statement for the Equipment
    * object that calls it.
    *
-   * @param int- id
-   * @param String- title
-   * @param string abstractText
-   * @param String- citation
-   * @return boolean true- for successful post
-   * @return boolean false- for unsuccessful post
+   * @param mysql - the database to use
+   * @return a boolean
    */
-   public boolean post(int id, String title, String abstractText, String citation) throws DLException{
+   public boolean post(String title, String abstractText, String citation) throws DLException{
       ArrayList<String> strVals = new ArrayList<String>();
 
       strVals.add(title);
@@ -251,8 +189,7 @@ public class Papers {
    * Equipment object that cals it.
    *
    * @param mysql - the database to use
-   * @return boolean true- successful delete
-   * @return boolean false- unsuccessful delete
+   * @return a boolean
    */
    public boolean delete() throws DLException {
       ArrayList<String> strVals = new ArrayList<String>();

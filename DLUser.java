@@ -37,16 +37,16 @@ public class DLUser {
   */
    public DLUser() {}
   /**Constructor gets username
-  *@param String- username 
+  *@param username 
   */ 
    public DLUser(String _username) {
       username = _username;
    }
    /**Constructor gets all attributes
-   *@param String- username
-   *@param String- password
-   *@param String- name
-   *@param String- access 
+   *@param username
+   *@param password
+   *@param name
+   *@param access 
    */
    public DLUser(String _username, String _password, String _name, String _access) {
       username = _username;
@@ -57,49 +57,49 @@ public class DLUser {
    
    // Accessors and Mutators
    /**Get username
-   *@return String- username 
+   *@return username String
    */
    protected String getUsername(){
 	return this.username;
    }
    /**Set username
-   *@param String- username 
+   *@param username String
    */
    protected void setUsername(String _username){
 	this.username = _username;
    }
    /**Get password
-   *@return String- password 
+   *@return password String
    */
    protected String getPassword(){
 	return this.password;
    }
    /**Set password
-   *@param String- password 
+   *@param password String
    */
    protected void setPassword(String _password){
 	this.password = _password;
    } 
    /**Get name
-   *@return String- name 
+   *@return name String
    */
    protected String getName(){
 	return this.name;
    }
    /**Set name
-   *@param String name 
+   *@param name String
    */
    protected void setName(String _name){
 	this.name = _name;
    } 
    /**Get access
-   *@return String- access 
+   *@return access String
    */
    protected String getAccess(){
 	return this.access;
    }  
    /**Set access
-   *@param String- access 
+   *@param access String
    */
    protected void setAccess(String _access){
 	this.access = _access;
@@ -115,8 +115,7 @@ public class DLUser {
    * If data is not avialable it will return false
    *
    * @param mysql - the database to use
-   * @return boolean true- for successful fetch
-   * @return boolean false- for unsuccessful fetch
+   * @return a boolean
    */
    protected boolean fetch() throws DLException {
       ArrayList<ArrayList<String>> result;
@@ -159,13 +158,7 @@ public class DLUser {
    * object that calls it.
    *
    * @param mysql - the database to use
-   * @param String- username
-   * @param String- password
-   * @param String- name
-   * @param STring- access
-   * @param String- key
-   * @return boolean true- for successful update
-   * @return boolean false- for unsuccessful update
+   * @return a boolean
    */
    public boolean put(String _username, String _password, String _name, String _access,  String _key) throws DLException {  
    ArrayList<String> strVals = new ArrayList<String>();
@@ -202,12 +195,7 @@ public class DLUser {
    * object that calls it.
    *
    * @param mysql - the database to use
-   * @param String- username
-   * @param String- password
-   * @param String- name
-   * @param String- access
-   * @reutrn boolean true- for successful post
-   * @return boolean false- for unsuccessful post
+   * @return a boolean
    */
    public boolean post(String _username, String _password, String _name, String _access) throws DLException{
       ArrayList<String> strVals = new ArrayList<String>();
@@ -242,8 +230,7 @@ public class DLUser {
    * object that cals it.
    *
    * @param mysql - the database to use
-   * @return boolean true- for successful delete
-   * @return boolean false- for unsuccessful delete
+   * @return a boolean
    */
    public boolean delete() throws DLException {
       ArrayList<String> strVals = new ArrayList<String>();
@@ -272,10 +259,9 @@ public class DLUser {
    * the rest of the user info will be filled in. If not,
    * false will be returned.
    *
-   * @param String - users username
-   * @param String - users password
-   * @return boolean true- for successful login
-   * @return boolean flase- for unsuccessful login
+   * @param username - users username
+   * @param password - users password
+   * @return boolean
    */ 
    protected boolean login(String _username, String _password) throws DLException, Exception {
       DLUser checkUser = new DLUser(_username);
@@ -313,8 +299,8 @@ public class DLUser {
    }//end login()
 	
    /**Search by Keyword
-   *@param String- keyword
-   *@return resultset- from keyword search
+   *@param keyword String
+   *@return resultset
    */
    public ArrayList<ArrayList<String>> searchKeyword(String keyword) throws DLException {
       ArrayList<ArrayList<String>> result;
@@ -339,8 +325,8 @@ public class DLUser {
    }
 	
    /**Search by Faculty Name
-   *@param String- facName
-   *@return resultset- from faculty search
+   *@param faculty name String
+   *@return resultset
    */
    public ArrayList<ArrayList<String>> searchFac(String facName) throws DLException {
       ArrayList<ArrayList<String>> result;
@@ -352,9 +338,7 @@ public class DLUser {
           throw new DLException(dle, "user fetch:66", "Can't Connect");
        }
       
-      String facultySelectQuery = "SELECT faculty.lName, papers.title FROM faculty JOIN " + 
-        "authorship ON authorship.facultyID = faculty.id JOIN papers ON papers.id = " + 
-        "authorship.paperId WHERE lName LIKE ?";
+      String facultySelectQuery = "SELECT lName FROM faculty WHERE lName LIKE ?";
       facNames.add(facName);
         try {                                        
          result = mysql.getData(facultySelectQuery, facNames);
@@ -367,8 +351,8 @@ public class DLUser {
    }//end searchKeyWord()
 	
    /**Search by topic
-   *@param string- topic 
-   *@return resultset- from topic search
+   *@param topic String
+   *@return resultset
    */
     public ArrayList<ArrayList<String>> searchTopics(String topic) throws DLException {
       ArrayList<ArrayList<String>> result;
@@ -391,6 +375,31 @@ public class DLUser {
       mysql.close();
       return result;
    }//end searchTopics
+   
+   
+   public int createCollaboration(String title) throws DLException {
+     ArrayList<ArrayList<String>> result;
+     ArrayList<String> collaborations = new ArrayList<>();
+     int id;
+      
+      try {
+        mysql.connect();
+      } catch(DLException dle) {
+         throw new DLException(dle, "user fetch:66", "Can't Connect");
+      }
+       
+      String papersSelectQuery = "SELECT id FROM papers WHERE title = ?";
+      collaborations.add(title);
+        
+      try {                                        
+        result = mysql.getData(papersSelectQuery, collaborations);
+      } catch(DLException dle) {
+         throw new DLException(dle, "user fetch:75", "SELECT Statement Error");
+      }  
 
-
+     id = Integer.parseInt(result.get(0).get(0));
+     mysql.close();
+     return id;
+  }
+     
 }//END CLASS
