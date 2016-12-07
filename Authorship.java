@@ -32,14 +32,14 @@ public class Authorship {
    }
    
    /**Constructor gets the id and sets the object in the class
-   *@param facultyId
+   *@param int- facultyId
    */
    public Authorship(int _facultyId) {
       facultyId = _facultyId;
    }
    
    /**Constructor gets the keyword and set the object in the class
-   *@param paperId
+   *@param int- paperId
    */
    public Authorship(int _paperId) {
       paperId = _paperId;
@@ -47,8 +47,8 @@ public class Authorship {
    
    //constructor for both if needed
    /**Constructor gets both faculty id and paper id and sets the object in the class
-   *@param facultyId
-   *@param paperId
+   *@param int- facultyId
+   *@param int- paperId
    */
    public Authorship(int _facultyId, int _paperId) {
       facultyId = _facultyId;
@@ -59,25 +59,25 @@ public class Authorship {
    //Accessors and Mutator methods
    
    /**Get FacultyId
-   *@return facultyId int
+   *@return int- facultyId
    */
    public int getFacultyId() {
       return this.facultyId;
    }
    /**Set facultyId
-   *@param facultyId int
+   *@param int- facultyId
    */
    public void setFacultyId(int _facultyId) {
       this.facultyId = _facultyId;
    }
    /**Get paperId
-   *@return paperId int
+   *@return int- paperId 
    */
    public int getPaperId() {
       return this.paperId;
    }
    /**Set paperId
-   *@param paperId int
+   *@param int- paperId
    */
    public void setPaperId(int _paperId) {
       this.paperId = _paperId;
@@ -92,7 +92,8 @@ public class Authorship {
    * If data is not avialable it will return false
    *
    * @param mysql - the database to use
-   * @return a boolean
+   * @return boolean true- for successful fetch
+   * @return boolean false- for unsuccessful fetch
    */
    
    //fecth method by facultyId
@@ -141,7 +142,11 @@ public class Authorship {
    * Authorship object that calls it.
    *
    * @param mysql - the database to use
-   * @return a boolean
+   * @param int- facultyId
+   * @param int- paperId
+   * @param int- key
+   * @return boolean true- successful update
+   * @return boolean flase- unsuccessful update
    */
    
    //put method when searching by facultyId
@@ -182,7 +187,10 @@ public class Authorship {
    * object that calls it.
    *
    * @param mysql - the database to use
-   * @return a boolean
+   * @param int- facultyId
+   * @param int- paperId
+   * @return boolean true- successful insert
+   * @return boolean false- unsuccessful insert
    */
    public boolean post(int facultyId,  int paperId) throws DLException{
       ArrayList<String> strVals = new ArrayList<String>();
@@ -216,7 +224,8 @@ public class Authorship {
    * Authorship object that cals it.
    *
    * @param mysql - the database to use
-   * @return a boolean
+   * @return boolean true- successful delete
+   * @return boolean false- unsuccessful delete
    */
    
    //delete method by facultyId
