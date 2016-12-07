@@ -26,34 +26,34 @@ public class Collaboration {
 	*/
 	public Collaboration() {} 
     /**Constructor gets gets paperId and userId
-    *@param paperId
-    *@param userId
+    *@param int- paperId
+    *@param int- userId
     */
     public Collaboration(int _paperId, int _userId) {
          paperId = _paperId;
          userId = _userId;
     }
     //accessor/mutators
-    /**Get paperId
-    *@return paperId int
+    /**Get int- paperId
+    *@return int- paperId 
     */
     public int getPaperId() {
     	return this.paperId;
     }
     /**Set paperId
-    *@param paperId int
+    *@param int- paperId 
     */
     public void setPaperId(int _paperId) {
     	this.paperId = _paperId;
     }
     /**Get userId
-    *@return userId int
+    *@return int- userId 
     */
     public int getUserId() {
     	return this.userId;
     }
     /**Set userId
-    *@param userId int
+    *@param int- userId
     */
     public void setUserId(int _userId) {
     	this.userId = _userId;
@@ -69,7 +69,8 @@ public class Collaboration {
    * If data is not avialable it will return false
    *
    * @param mysql - the database to use
-   * @return a boolean
+   * @return boolean true- for successful fetch
+   * @return boolean false- for unsuccessful fetch
    */
    
     public boolean fetch() throws DLException {
@@ -112,7 +113,11 @@ public class Collaboration {
    * Authorship object that calls it.
    *
    * @param mysql - the database to use
-   * @return a boolean
+   * @param int- facultyId
+   * @param int- paperId
+   * @param int- key
+   * @return boolean true- successful update
+   * @return boolean false- unsuccessful update
    */
    
    //put method when searching by facultyId
@@ -150,7 +155,10 @@ public class Collaboration {
    * object that calls it.
    *
    * @param mysql - the database to use
-   * @return a boolean
+   * @param int- paperId
+   * @param int- userId
+   * @return boolean true- for successful post
+   * @return boolean false- for unsuccessful post
    */
    public boolean post(int paperId,  int userId) throws DLException{
       ArrayList<String> strVals = new ArrayList<String>();
@@ -184,7 +192,8 @@ public class Collaboration {
    * Authorship object that cals it.
    *
    * @param mysql - the database to use
-   * @return a boolean
+   * @return boolean true- for successsful delete
+   * @return boolean false- for unsuccessful delete
    */
    
    //delete method by facultyId
