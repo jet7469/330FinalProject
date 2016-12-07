@@ -366,7 +366,7 @@ public class DLUser {
           throw new DLException(dle, "user fetch:66", "Can't Connect");
        }
       
-      String topicSelectQuery = "SELECT papers.title, paper_keywords.keyword FROM papers JOIN paper_keywords ON papers.id = paper_keywords.id WHERE keyword LIKE ? GROUP BY title"";
+      String topicSelectQuery = "SELECT papers.title, paper_keywords.keyword FROM papers JOIN paper_keywords ON papers.id = paper_keywords.id WHERE keyword LIKE ? GROUP BY title";
       topics.add(topic);
         try {                                        
          result = mysql.getData(topicSelectQuery, topics);
